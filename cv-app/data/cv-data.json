@@ -123,7 +123,7 @@
     },
     {
       "category": "DevOps & Tools",
-      "items": ["Git", "Docker", "CI/CD", "Jenkins", "XlDeploy", "Github Actions"]
+      "items": ["Git", "Docker", "CI/CD", "Jenkins", "XlDeploy"]
     },
     {
       "category": "Langues",

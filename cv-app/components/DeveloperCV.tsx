@@ -552,7 +552,7 @@ export function DeveloperCV() {
           <div className="w-2 h-2 rounded-full bg-gradient-to-r from-slate-400 to-blue-400 animate-pulse"></div>
           <p className="font-medium">CV créé avec Next.js et Tailwind CSS</p>
           <div className="w-1 h-1 rounded-full bg-gray-400"></div>
-          <p>Dernière mise à jour : {new Date().toLocaleDateString('fr-FR')}</p>
+          <p>Dernière mise à jour : Octobre 2025</p>
           <div
             className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 animate-pulse"
             style={{ animationDelay: "0.5s" }}
