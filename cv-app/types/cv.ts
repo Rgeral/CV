@@ -18,6 +18,17 @@ export interface Education {
   description?: string;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies?: string[];
+  link?: string;
+  github?: string;
+  image?: string;
+  highlights: string[];
+}
+
 export interface CVData {
   personalInfo: {
     name: string;
@@ -32,6 +43,7 @@ export interface CVData {
   summary: string;
   experiences: Experience[];
   education: Education[];
+  projects: Project[];
   skills: {
     category: string;
     items: string[];

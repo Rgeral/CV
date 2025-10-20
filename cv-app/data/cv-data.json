@@ -54,8 +54,7 @@
         "Mise en oeuvre de stratégies de communication efficaces",
         "Gestion du stress et adaptation rapide",
         "Leadership et esprit d'équipe"
-      ],
-      "technologies": ["corps", "discipline", "endurance"]
+      ]
     }
   ],
   "education": [
@@ -75,18 +74,56 @@
       "period": "2013 - 2016"
     }
   ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "ChessClub",
+      "description": "Mise en place d'une application Web pour jouer aux échecs contre Stockfish, hébergement sur mon propre serveur.",
+      "technologies": ["Svelte", "Rust", "Sqlite", "Docker"],
+      "link": "chess.rdevs.fr",
+      "github": "github.com/rgeral/chess",
+      "highlights": [
+        "Envie d'apprendre de nouvelles technologies",
+        "Apprendre a heberger et deployer une application sur un serveur personnel",
+        "Optimisation des performances pour une expérience utilisateur fluide"
+      ]
+    },
+    {
+      "id": "proj-2",
+      "title": "Serveur de Streaming Multimédia",
+      "description": "Mise en place d'un serveur de streaming multimédia pour diffuser des films/séries via Plex",
+      "technologies": ["Script Bash", "Plex", "Docker", "Nginx", "cloudflare"],
+      "highlights": [
+        "Comprendre les bases du streaming multimédia",
+        "Communication entre 6 services différents",
+        "Mise en place d'un système sécurisé et performant pour plusieurs utilisateurs"
+      ]
+    },
+    {
+      "id": "proj-3",
+      "title": "Projet en cours : RunInColor",
+      "description": "Création d'une application mobile de running ludique et colorée pour encourager l'activité physique.",
+      "technologies": ["Dart", "Go", "Docker"],
+      "link": "https://github.com/Rgeral/RuninColor",
+      "highlights": [
+        "Découverte nouvelles technologies mobiles",
+        "Hébergement d'une API en Go",
+        "Perfectionnement CI et test unitaires"
+      ]
+    }
+  ],
   "skills": [
     {
       "category": "Frontend",
-      "items": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]
+      "items": ["Angular", "React", "Svelte", "Dart"]
     },
     {
       "category": "Backend",
-      "items": ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB"]
+      "items": ["Node.js", "Express", "Java", "SpringBoot", "Rust", "Go"]
     },
     {
       "category": "DevOps & Tools",
-      "items": ["Git", "Docker", "CI/CD", "AWS", "Vercel"]
+      "items": ["Git", "Docker", "CI/CD", "Jenkins", "XlDeploy", "Github Actions"]
     },
     {
       "category": "Langues",

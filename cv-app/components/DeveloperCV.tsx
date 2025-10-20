@@ -17,6 +17,8 @@ import {
   Briefcase,
   GraduationCap,
   Award,
+  Rocket,
+  ExternalLink,
 } from "lucide-react"
 import cvData from '@/data/cv-data.json';
 import { CVData } from '@/types/cv';
@@ -289,10 +291,143 @@ export function DeveloperCV() {
         </div>
       </section>
 
-      {/* Skills */}
+      {/* Projects */}
       <section
         className="mb-12 animate-in fade-in slide-in-from-bottom duration-700"
         style={{ animationDelay: "300ms" }}
+      >
+        <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-gray-800">
+          <div className="w-12 h-1.5 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 rounded-full"></div>
+          <Rocket className="w-7 h-7 text-emerald-600" />
+          Projets personnels
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {data.projects.map((project, index) => {
+            const projectThemes = [
+              {
+                border: "from-emerald-300 to-teal-300",
+                bg: "from-emerald-50/60 to-teal-50/50",
+                accent: "text-emerald-600",
+                button: "from-emerald-500 to-teal-500",
+              },
+              {
+                border: "from-teal-300 to-cyan-300",
+                bg: "from-teal-50/60 to-cyan-50/50",
+                accent: "text-teal-600",
+                button: "from-teal-500 to-cyan-500",
+              },
+              {
+                border: "from-cyan-300 to-sky-300",
+                bg: "from-cyan-50/60 to-sky-50/50",
+                accent: "text-cyan-600",
+                button: "from-cyan-500 to-sky-500",
+              },
+            ]
+            const theme = projectThemes[index % projectThemes.length]
+
+            return (
+              <Card
+                key={project.id}
+                className="relative overflow-hidden p-6 bg-white border-2 border-transparent hover:border-emerald-200 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] duration-300 group"
+              >
+                <div
+                  className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${theme.border} group-hover:w-2 transition-all duration-300`}
+                ></div>
+
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${theme.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                ></div>
+
+                <div className="relative">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-bold text-gray-800 group-hover:text-emerald-700 transition-colors flex-1">
+                      {project.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-gray-600 mb-4 leading-relaxed text-sm">
+                    {project.description}
+                  </p>
+
+                  <div className="mb-4">
+                    <h4 className="text-xs font-bold mb-2 flex items-center gap-2 text-emerald-700">
+                      <Award className="w-3 h-3" />
+                      Points clés :
+                    </h4>
+                    <ul className="space-y-1">
+                      {project.highlights.map((highlight, idx) => (
+                        <li key={idx} className="text-xs text-gray-600 flex gap-2 leading-relaxed">
+                          <span className="text-emerald-500 mt-0.5 font-bold">▸</span>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mb-4">
+                    <h4 className="text-xs font-bold mb-2 flex items-center gap-2 text-emerald-700">
+                      <Code2 className="w-3 h-3" />
+                      Technologies :
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech, techIndex) => {
+                        const colors = [
+                          "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white",
+                          "bg-gradient-to-r from-teal-500 to-teal-600 text-white",
+                          "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white",
+                          "bg-gradient-to-r from-sky-500 to-sky-600 text-white",
+                        ]
+                        const colorClass = colors[techIndex % colors.length]
+                        return (
+                          <Badge
+                            key={tech}
+                            className={`${colorClass} shadow-md hover:scale-110 transition-transform duration-200 font-medium px-2 py-0.5 text-xs`}
+                          >
+                            {tech}
+                          </Badge>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 mt-4">
+                    {project.github && (
+                      <a
+                        href={`https://${project.github}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r ${theme.button} text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all duration-300 hover:scale-105`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        Code
+                      </a>
+                    )}
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r ${theme.button} text-white rounded-lg text-xs font-medium hover:shadow-lg transition-all duration-300 hover:scale-105`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        Demo
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </Card>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section
+        className="mb-12 animate-in fade-in slide-in-from-bottom duration-700"
+        style={{ animationDelay: "400ms" }}
       >
         <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-gray-800">
           <div className="w-12 h-1.5 bg-gradient-to-r from-slate-400 via-blue-400 to-indigo-400 rounded-full"></div>
@@ -364,7 +499,7 @@ export function DeveloperCV() {
       {/* Education */}
       <section
         className="mb-12 animate-in fade-in slide-in-from-bottom duration-700"
-        style={{ animationDelay: "400ms" }}
+        style={{ animationDelay: "500ms" }}
       >
         <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-gray-800">
           <div className="w-12 h-1.5 bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 rounded-full"></div>
@@ -407,7 +542,7 @@ export function DeveloperCV() {
       {/* Footer */}
       <footer
         className="text-center text-sm text-gray-500 pt-8 border-t-2 border-gray-200 animate-in fade-in duration-700"
-        style={{ animationDelay: "500ms" }}
+        style={{ animationDelay: "600ms" }}
       >
         <div className="flex items-center justify-center gap-3 flex-wrap">
           <div className="w-2 h-2 rounded-full bg-gradient-to-r from-slate-400 to-blue-400 animate-pulse"></div>
