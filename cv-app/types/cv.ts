@@ -6,7 +6,7 @@ export interface Experience {
   period: string;
   description: string;
   details: string[];
-  technologies: string[];
+  technologies?: string[];
 }
 
 export interface Education {

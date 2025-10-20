@@ -245,33 +245,35 @@ export function DeveloperCV() {
                         </ul>
                       </div>
 
-                      <div>
-                        <h4 className="text-sm font-bold mb-3 flex items-center gap-2 text-blue-700">
-                          <Code2 className="w-4 h-4" />
-                          Technologies utilisées :
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {exp.technologies.map((tech, techIndex) => {
-                            const colors = [
-                              "bg-gradient-to-r from-slate-500 to-slate-600 text-white",
-                              "bg-gradient-to-r from-blue-500 to-blue-600 text-white",
-                              "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white",
-                              "bg-gradient-to-r from-violet-500 to-violet-600 text-white",
-                              "bg-gradient-to-r from-sky-500 to-sky-600 text-white",
-                              "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white",
-                            ]
-                            const colorClass = colors[techIndex % colors.length]
-                            return (
-                              <Badge
-                                key={tech}
-                                className={`${colorClass} shadow-md hover:scale-110 transition-transform duration-200 font-medium px-3 py-1`}
-                              >
-                                {tech}
-                              </Badge>
-                            )
-                          })}
+                      {exp.technologies && exp.technologies.length > 0 && (
+                        <div>
+                          <h4 className="text-sm font-bold mb-3 flex items-center gap-2 text-blue-700">
+                            <Code2 className="w-4 h-4" />
+                            Technologies utilisées :
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.technologies.map((tech, techIndex) => {
+                              const colors = [
+                                "bg-gradient-to-r from-slate-500 to-slate-600 text-white",
+                                "bg-gradient-to-r from-blue-500 to-blue-600 text-white",
+                                "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white",
+                                "bg-gradient-to-r from-violet-500 to-violet-600 text-white",
+                                "bg-gradient-to-r from-sky-500 to-sky-600 text-white",
+                                "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white",
+                              ]
+                              const colorClass = colors[techIndex % colors.length]
+                              return (
+                                <Badge
+                                  key={tech}
+                                  className={`${colorClass} shadow-md hover:scale-110 transition-transform duration-200 font-medium px-3 py-1`}
+                                >
+                                  {tech}
+                                </Badge>
+                              )
+                            })}
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   )}
 
@@ -365,31 +367,33 @@ export function DeveloperCV() {
                     </ul>
                   </div>
 
-                  <div className="mb-4">
-                    <h4 className="text-xs font-bold mb-2 flex items-center gap-2 text-emerald-700">
-                      <Code2 className="w-3 h-3" />
-                      Technologies :
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, techIndex) => {
-                        const colors = [
-                          "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white",
-                          "bg-gradient-to-r from-teal-500 to-teal-600 text-white",
-                          "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white",
-                          "bg-gradient-to-r from-sky-500 to-sky-600 text-white",
-                        ]
-                        const colorClass = colors[techIndex % colors.length]
-                        return (
-                          <Badge
-                            key={tech}
-                            className={`${colorClass} shadow-md hover:scale-110 transition-transform duration-200 font-medium px-2 py-0.5 text-xs`}
-                          >
-                            {tech}
-                          </Badge>
-                        )
-                      })}
+                  {project.technologies && project.technologies.length > 0 && (
+                    <div className="mb-4">
+                      <h4 className="text-xs font-bold mb-2 flex items-center gap-2 text-emerald-700">
+                        <Code2 className="w-3 h-3" />
+                        Technologies :
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => {
+                          const colors = [
+                            "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white",
+                            "bg-gradient-to-r from-teal-500 to-teal-600 text-white",
+                            "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white",
+                            "bg-gradient-to-r from-sky-500 to-sky-600 text-white",
+                          ]
+                          const colorClass = colors[techIndex % colors.length]
+                          return (
+                            <Badge
+                              key={tech}
+                              className={`${colorClass} shadow-md hover:scale-110 transition-transform duration-200 font-medium px-2 py-0.5 text-xs`}
+                            >
+                              {tech}
+                            </Badge>
+                          )
+                        })}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="flex gap-2 mt-4">
                     {project.github && (

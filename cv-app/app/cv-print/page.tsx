@@ -93,22 +93,24 @@ export default function CVPrintPage() {
                   </div>
                   <p className="text-xs text-gray-600 leading-relaxed mb-1.5">{exp.description}</p>
 
-                  <div className="flex flex-wrap gap-1">
-                    {exp.technologies.map((tech, techIndex) => {
-                      const colors = [
-                        "bg-slate-50 text-slate-700 border-slate-200",
-                        "bg-blue-50 text-blue-700 border-blue-200",
-                        "bg-indigo-50 text-indigo-700 border-indigo-200",
-                        "bg-violet-50 text-violet-700 border-violet-200",
-                      ]
-                      const colorClass = colors[techIndex % colors.length]
-                      return (
-                        <span key={tech} className={`px-2 py-0.5 rounded border text-xs font-medium ${colorClass}`}>
-                          {tech}
-                        </span>
-                      )
-                    })}
-                  </div>
+                  {exp.technologies && exp.technologies.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {exp.technologies.map((tech, techIndex) => {
+                        const colors = [
+                          "bg-slate-50 text-slate-700 border-slate-200",
+                          "bg-blue-50 text-blue-700 border-blue-200",
+                          "bg-indigo-50 text-indigo-700 border-indigo-200",
+                          "bg-violet-50 text-violet-700 border-violet-200",
+                        ]
+                        const colorClass = colors[techIndex % colors.length]
+                        return (
+                          <span key={tech} className={`px-2 py-0.5 rounded border text-xs font-medium ${colorClass}`}>
+                            {tech}
+                          </span>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
             )
