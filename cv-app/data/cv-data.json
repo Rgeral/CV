@@ -1,0 +1,96 @@
+{
+  "personalInfo": {
+    "name": "Votre Nom",
+    "title": "Développeur Full Stack",
+    "email": "votre.email@example.com",
+    "phone": "+33 6 12 34 56 78",
+    "location": "Paris, France",
+    "linkedin": "linkedin.com/in/votre-profil",
+    "github": "github.com/votre-username",
+    "website": "votre-site.com"
+  },
+  "summary": "Développeur passionné avec X années d'expérience dans le développement d'applications web modernes. Spécialisé en React, Next.js et Node.js.",
+  "experiences": [
+    {
+      "id": "exp-1",
+      "title": "Développeur Full Stack Junior",
+      "company": "Slib",
+      "location": "Lyon, France",
+      "period": "Jan 2025 - present",
+      "description": "Développement d'applications web Angular | Java",
+      "details": [
+        "Création from scratch d'une application web complète pour la gestion du vote CSE",
+        "Choix des technologies adaptées aux besoins du projet",
+        "Gestion de projet, travail d'équipe",
+        "Mise en production dans un environnement sécurisé"
+      ],
+      "technologies": ["Angular", "Java", "SpringBoot", "PostgreSQL", "Docker", "Jenkins", "XlDeploy"]
+    },
+    {
+      "id": "exp-2",
+      "title": "Développeur Stagiaire",
+      "company": "Bill Apps",
+      "location": "Lyon, France",
+      "period": "juil 2024 - jan 2025",
+      "description": "Création d'interfaces utilisateur modernes et responsives",
+      "details": [
+        "Développement de composants réutilisables avec React",
+        "Intégration d'APIs REST",
+        "Création d'une application mobile React Native",
+        "Acclimatation aux applications en microservices",
+        "Travail en méthode agile"
+      ],
+      "technologies": ["React", "Redux", "NodeJs", "ReactNative"]
+    },
+    {
+      "id": "exp-3",
+      "title": "Militaire du rang",
+      "company": "Armée de Terre | 3ème RPIMA",
+      "location": "Carcassonne, France",
+      "period": "2020 -",
+      "description": "Travail d'équipe, discipline et résilience",
+      "details": [
+        "Apprentissage des valeurs militaires fondamentales",
+        "Mise en oeuvre de stratégies de communication efficaces",
+        "Gestion du stress et adaptation rapide",
+        "Leadership et esprit d'équipe"
+      ],
+      "technologies": ["corps", "discipline", "endurance"]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "degree": "Master en Informatique",
+      "school": "Université de Paris",
+      "location": "Paris, France",
+      "period": "2016 - 2018",
+      "description": "Spécialisation en développement web et architecture logicielle"
+    },
+    {
+      "id": "edu-2",
+      "degree": "Licence en Informatique",
+      "school": "Université de Lyon",
+      "location": "Lyon, France",
+      "period": "2013 - 2016"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB"]
+    },
+    {
+      "category": "DevOps & Tools",
+      "items": ["Git", "Docker", "CI/CD", "AWS", "Vercel"]
+    },
+    {
+      "category": "Langues",
+      "items": ["Français (Natif)", "Anglais (Courant)"]
+    }
+  ]
+}
