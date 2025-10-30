@@ -29,7 +29,7 @@ jobs:
           key: ${{ secrets.NAS_SSH_KEY }}
           port: ${{ secrets.NAS_PORT }}
           source: "cv-app.tar.gz,docker-compose.yml,deploy.sh"
-          target: "/volume1/docker/cv-app"
+          target: "~/docker/cv-app"
 
       - name: Deploy on NAS
         uses: appleboy/ssh-action@v1.2.0
@@ -39,6 +39,6 @@ jobs:
           key: ${{ secrets.NAS_SSH_KEY }}
           port: ${{ secrets.NAS_PORT }}
           script: |
-            cd /volume1/docker/cv-app
+            cd ~/docker/cv-app
             chmod +x deploy.sh
             ./deploy.sh
