@@ -1,12 +1,12 @@
 {
   "personalInfo": {
-    "name": "Votre Nom",
+    "name": "Robin Geral",
     "title": "Développeur Full Stack",
-    "email": "votre.email@example.com",
-    "phone": "+33 6 12 34 56 78",
-    "location": "Paris, France",
-    "linkedin": "linkedin.com/in/votre-profil",
-    "github": "github.com/votre-username",
+    "email": "rgeral.pro@gmail.com",
+    "phone": "+33 6 35 52 43 28",
+    "location": "Lyon, France",
+    "linkedin": "linkedin.com/in/robin-geral",
+    "github": "github.com/rgeral",
     "website": "votre-site.com"
   },
   "summary": "Développeur passionné avec X années d'expérience dans le développement d'applications web modernes. Spécialisé en React, Next.js et Node.js.",
