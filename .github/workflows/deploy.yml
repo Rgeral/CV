@@ -25,7 +25,7 @@ jobs:
         with:
           host: 192.168.1.22
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          key: ${{ secrets.NAS_SSH_KEY }}
           source: "app/**,components/**,data/**,lib/**,public/**,types/**,Dockerfile,docker-compose.yml,.dockerignore,next.config.ts,package.json,package-lock.json,tsconfig.json,postcss.config.mjs,eslint.config.mjs"
           target: "/home/rgeral/docker/cv-app"
 
@@ -34,7 +34,7 @@ jobs:
         with:
           host: 192.168.1.22
           username: ${{ secrets.SERVER_USER }} 
-          key: ${{ secrets.SERVER_SSH_KEY }}
+          key: ${{ secrets.NAS_SSH_KEY }}
           script: |
             cd /home/rgeral/docker/cv-app
             docker-compose down --remove-orphans || true
