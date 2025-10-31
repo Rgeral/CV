@@ -37,8 +37,10 @@ jobs:
           port: ${{ secrets.NAS_PORT }}
           username: ${{ secrets.NAS_USERNAME }}
           key: ${{ secrets.NAS_SSH_KEY }}
+          command_timeout: 30m
+          timeout: 30m
           script: |
             cd /home/rgeral/docker/cv-app
             docker-compose down --remove-orphans || true
-            docker-compose build
+            docker-compose build --no-cache
             docker-compose up -d --remove-orphans 
