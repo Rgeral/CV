@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   cv-app:
-    image: cv-app:latest
+    build: .
     container_name: cv-app
     restart: unless-stopped
     ports:
@@ -10,9 +10,3 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=8080
-    networks:
-      - cv-network
-
-networks:
-  cv-network:
-    driver: bridge
