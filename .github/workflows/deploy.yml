@@ -13,18 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Pre-download drone-scp (before WireGuard)
-        run: |
-          mkdir -p /tmp/drone-scp
-          cd /tmp/drone-scp
-          curl -L https://github.com/appleboy/drone-scp/releases/download/v1.8.0/drone-scp-1.8.0-linux-amd64 -o drone-scp
-          chmod +x drone-scp
-          echo "/tmp/drone-scp" >> $GITHUB_PATH
-
       - name: Setup WireGuard
         run: |
           sudo apt-get update
-          sudo apt-get install -y wireguard resolvconf
+          sudo apt-get install -y wireguard
           echo "${{ secrets.WIREGUARD_CONFIG }}" > wg0.conf
           sudo wg-quick up ./wg0.conf
 
