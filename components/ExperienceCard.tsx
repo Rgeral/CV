@@ -67,7 +67,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
 
               <h4 className="font-semibold text-gray-900 mb-3">Technologies :</h4>
               <div className="flex flex-wrap gap-2">
-                {experience.technologies.map((tech, index) => (
+                {experience.technologies?.map((tech, index) => (
                   <motion.span
                     key={tech}
                     initial={{ scale: 0 }}
