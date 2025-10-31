@@ -20,35 +20,12 @@ jobs:
           echo "${{ secrets.WIREGUARD_CONFIG }}" > wg0.conf
           sudo wg-quick up ./wg0.conf
 
-      - name: Debug SSH Setup
-        run: |
-          echo "=== Testing SSH connection ==="
-          mkdir -p ~/.ssh
-          echo "${{ secrets.NAS_SSH_KEY }}" > ~/.ssh/test_key
-          chmod 600 ~/.ssh/test_key
-          
-          echo "Key file size: $(wc -c < ~/.ssh/test_key) bytes"
-          echo "Key file first line: $(head -n 1 ~/.ssh/test_key)"
-          echo "Key file last line: $(tail -n 1 ~/.ssh/test_key)"
-          
-          echo "=== Extracting public key from private key ==="
-          ssh-keygen -y -f ~/.ssh/test_key > ~/.ssh/test_key.pub
-          echo "Public key:"
-          cat ~/.ssh/test_key.pub
-          
-          echo "=== Testing SSH connection to 192.168.1.22 ==="
-          ssh-keyscan -H 192.168.1.22 >> ~/.ssh/known_hosts 2>/dev/null
-          
-          echo "=== Attempting SSH connection ==="
-          ssh -i ~/.ssh/test_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USER }}@192.168.1.22 "echo 'SSH connection successful' && whoami && pwd" || echo "SSH connection failed"
-          
-          rm ~/.ssh/test_key ~/.ssh/test_key.pub
-
       - name: Copy files to NAS via SSH
         uses: appleboy/scp-action@v1 
         with:
-          host: 192.168.1.22
-          username: ${{ secrets.SERVER_USER }}
+          host: ${{ secrets.NAS_HOST }}
+          port: ${{ secrets.NAS_PORT }}
+          username: ${{ secrets.NAS_USERNAME }}
           key: ${{ secrets.NAS_SSH_KEY }}
           source: "app/**,components/**,data/**,lib/**,public/**,types/**,Dockerfile,docker-compose.yml,.dockerignore,next.config.ts,package.json,package-lock.json,tsconfig.json,postcss.config.mjs,eslint.config.mjs"
           target: "/home/rgeral/docker/cv-app"
@@ -56,8 +33,9 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 192.168.1.22
-          username: ${{ secrets.SERVER_USER }} 
+          host: ${{ secrets.NAS_HOST }}
+          port: ${{ secrets.NAS_PORT }}
+          username: ${{ secrets.NAS_USERNAME }}
           key: ${{ secrets.NAS_SSH_KEY }}
           script: |
             cd /home/rgeral/docker/cv-app
