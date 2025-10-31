@@ -28,6 +28,8 @@ jobs:
           echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 192.168.1.22 >> ~/.ssh/known_hosts
+          # Vérifier que la clé est valide
+          ssh-keygen -l -f ~/.ssh/id_rsa
 
       - name: Copy files to NAS via SCP
         run: |
