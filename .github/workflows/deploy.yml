@@ -19,24 +19,25 @@ jobs:
           sudo apt-get install -y wireguard resolvconf
           echo "${{ secrets.WIREGUARD_CONFIG }}" > wg0.conf
           sudo wg-quick up ./wg0.conf
+          # Attendre que la connexion soit établie
+          sleep 5
 
-      - name: Copy files to NAS via SSH
-        uses: appleboy/scp-action@v1
-        with:
-          host: 192.168.1.22
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "app/**,components/**,data/**,lib/**,public/**,types/**,Dockerfile,docker-compose.yml,.dockerignore,next.config.ts,package.json,package-lock.json,tsconfig.json,postcss.config.mjs,eslint.config.mjs"
-          target: "/home/rgeral/docker/cv-app"
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 192.168.1.22 >> ~/.ssh/known_hosts
+
+      - name: Copy files to NAS via SCP
+        run: |
+          scp -r app components data lib public types Dockerfile docker-compose.yml .dockerignore next.config.ts package.json package-lock.json tsconfig.json postcss.config.mjs eslint.config.mjs ${{ secrets.SERVER_USER }}@192.168.1.22:/home/rgeral/docker/cv-app/
 
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: 192.168.1.22
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@192.168.1.22 << 'EOF'
             cd /home/rgeral/docker/cv-app
             docker-compose down --remove-orphans || true
             docker-compose build
             docker-compose up -d --remove-orphans
+          EOF
