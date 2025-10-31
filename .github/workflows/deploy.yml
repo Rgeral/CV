@@ -13,32 +13,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker image
+      - name: Setup WireGuard
         run: |
-          docker build -t cv-app:latest .
-          docker save cv-app:latest | gzip > cv-app.tar.gz
+          sudo apt-get update
+          sudo apt-get install -y wireguard
+          echo "${{ secrets.WIREGUARD_CONFIG }}" > wg0.conf
+          sudo wg-quick up ./wg0.conf
 
-      - name: Copy files to NAS
-        uses: appleboy/scp-action@v0.1.7
+      - name: Copy files to NAS via SSH
+        uses: appleboy/scp-action@v1
         with:
-          host: ${{ secrets.NAS_HOST }}
-          username: ${{ secrets.NAS_USERNAME }}
-          key: ${{ secrets.NAS_SSH_KEY }}
-          port: ${{ secrets.NAS_PORT }}
-          source: "cv-app.tar.gz,docker-compose.yml,deploy.sh"
-          target: "~/docker/cv-app"
+          host: 192.168.1.22
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "app/**,components/**,data/**,lib/**,public/**,types/**,Dockerfile,docker-compose.yml,.dockerignore,next.config.ts,package.json,package-lock.json,tsconfig.json,postcss.config.mjs,eslint.config.mjs"
+          target: "/home/rgeral/docker/cv-app"
 
-      - name: Deploy on NAS
-        uses: appleboy/ssh-action@v1.2.0
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.NAS_HOST }}
-          username: ${{ secrets.NAS_USERNAME }}
-          key: ${{ secrets.NAS_SSH_KEY }}
-          port: ${{ secrets.NAS_PORT }}
+          host: 192.168.1.22
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd ~/docker/cv-app
-            chmod +x deploy.sh
-            ./deploy.sh
+            cd /home/rgeral/docker/cv-app
+            docker-compose down --remove-orphans || true
+            docker-compose build
+            docker-compose up -d --remove-orphans
