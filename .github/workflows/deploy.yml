@@ -40,7 +40,7 @@ jobs:
           ssh-keyscan -H 192.168.1.22 >> ~/.ssh/known_hosts 2>/dev/null
           
           echo "=== Attempting SSH connection ==="
-          ssh -i ~/.ssh/test_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USER }}@192.168.1.22 'echo "SSH connection successful"; whoami; pwd' || echo "SSH connection failed"
+          ssh -i ~/.ssh/test_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USER }}@192.168.1.22 "echo 'SSH connection successful' && whoami && pwd" || echo "SSH connection failed"
           
           rm ~/.ssh/test_key ~/.ssh/test_key.pub
 
