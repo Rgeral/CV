@@ -20,6 +20,25 @@ jobs:
           echo "${{ secrets.WIREGUARD_CONFIG }}" > wg0.conf
           sudo wg-quick up ./wg0.conf
 
+      - name: Debug SSH Setup
+        run: |
+          echo "=== Testing SSH connection ==="
+          mkdir -p ~/.ssh
+          echo "${{ secrets.NAS_SSH_KEY }}" > ~/.ssh/test_key
+          chmod 600 ~/.ssh/test_key
+          
+          echo "Key file size: $(wc -c < ~/.ssh/test_key) bytes"
+          echo "Key file first line: $(head -n 1 ~/.ssh/test_key)"
+          echo "Key file last line: $(tail -n 1 ~/.ssh/test_key)"
+          
+          echo "=== Testing SSH connection to 192.168.1.22 ==="
+          ssh-keyscan -H 192.168.1.22 >> ~/.ssh/known_hosts
+          
+          echo "=== Attempting SSH connection ==="
+          ssh -i ~/.ssh/test_key -o StrictHostKeyChecking=no -v ${{ secrets.SERVER_USER }}@192.168.1.22 "echo 'SSH connection successful'; whoami; pwd" || echo "SSH connection failed"
+          
+          rm ~/.ssh/test_key
+
       - name: Copy files to NAS via SSH
         uses: appleboy/scp-action@v1 
         with:
