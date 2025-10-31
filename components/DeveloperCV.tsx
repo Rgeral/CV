@@ -180,7 +180,7 @@ export function DeveloperCV() {
         <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-gray-800">
           <div className="w-12 h-1.5 bg-gradient-to-r from-slate-400 via-blue-400 to-indigo-400 rounded-full"></div>
           <Briefcase className="w-7 h-7 text-blue-600" />
-          Expérience professionnelle
+          Expériences professionnelles
         </h2>
 
         <div className="space-y-5">
