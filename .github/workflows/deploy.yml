@@ -38,9 +38,19 @@ jobs:
           username: ${{ secrets.NAS_USERNAME }}
           key: ${{ secrets.NAS_SSH_KEY }}
           command_timeout: 30m
-          timeout: 30m
           script: |
             cd /home/rgeral/docker/cv-app
             docker-compose down --remove-orphans || true
-            docker-compose build --no-cache
-            docker-compose up -d --remove-orphans 
+            nohup docker-compose build --no-cache > /tmp/cv-build.log 2>&1 &
+            BUILD_PID=$!
+            echo "Build started with PID $BUILD_PID"
+            
+            # Attendre que le build se termine
+            while kill -0 $BUILD_PID 2>/dev/null; do
+              echo "Build in progress..."
+              sleep 10
+            done
+            
+            echo "Build completed, starting containers..."
+            docker-compose up -d --remove-orphans
+            echo "Deployment completed successfully!" 
