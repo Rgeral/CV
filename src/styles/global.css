@@ -307,7 +307,8 @@ body:has(.enter-cb:checked) .enter-screen { display: none; }
   .pin--flow > section { position: relative; height: auto; min-height: var(--screen); padding-top: 48px; padding-bottom: 48px; }
   .pin > section { padding-left: 16px; padding-right: 16px; }
   .profile__id { border-right: 0; border-bottom: 1.5px solid var(--ink); flex-basis: 100%; }
-  .profile__photo { min-height: 320px; }
+  .profile__photo { flex: none; min-height: 0; aspect-ratio: 956 / 1092; max-height: 70svh; outline: 1px solid var(--rule-2); outline-offset: -1px; }
+  .profile__photo img { object-position: 50% 15%; }
   .skills { grid-template-columns: 1fr; grid-template-rows: none; }
   .track__name { display: none; }
   .timeline__row { grid-template-columns: 1fr 24px; }
