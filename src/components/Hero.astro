@@ -1,0 +1,17 @@
+---
+import { portfolio, NAME, REGION } from "../lib";
+---
+
+<div id="w-hero" class="pin" style="--len: 1.5">
+  <section id="s-hero" class="hero">
+    <div class="hero__meta label">
+      <span>{NAME} / {REGION} / EST. {portfolio.established}</span>
+      <span>PORTFOLIO — {portfolio.edition}</span>
+    </div>
+    <h1 class="display">Fullstack<br />developer<span class="cursor">_</span></h1>
+    <div class="hero__foot label">
+      <span>SCROLL <span class="accent" data-scroll-label>000</span></span>
+      <a href="#w-profile" style="min-height:44px;display:flex;align-items:center">↓ SCROLL TO EXPLORE</a>
+    </div>
+  </section>
+</div>

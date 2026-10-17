@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import Chrome from "../components/Chrome.astro";
+import Hero from "../components/Hero.astro";
+import Profile from "../components/Profile.astro";
+import Projects from "../components/Projects.astro";
+import Experience from "../components/Experience.astro";
+import Skills from "../components/Skills.astro";
+import Contact from "../components/Contact.astro";
+import { info, summary } from "../lib";
+---
+
+<Base title={`${info.name} — ${info.title}`} description={summary}>
+  <Chrome />
+  <main>
+    <Hero />
+    <Profile />
+    <Projects />
+    <Experience />
+    <Skills />
+    <Contact />
+  </main>
+</Base>
+
+<script>
+  import "../scripts/scroll.ts";
+</script>
