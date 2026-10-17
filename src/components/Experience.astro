@@ -1,0 +1,119 @@
+---
+import { experiences } from "../lib";
+---
+
+<div id="w-experience" class="pin pin--open">
+  <section id="s-experience">
+    <div class="sec-title"><span>03</span><h2 class="display">Experience</h2></div>
+    <div class="timeline card card--shadow">
+      {experiences.map((e, i) => (
+        <details class="timeline__item" open={i === 0}>
+          <summary class="timeline__row">
+            <span class="timeline__years">{e.years}</span>
+            <span class="timeline__role display">{e.title}</span>
+            <span class="timeline__company">{e.company}</span>
+            <span class="timeline__toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="timeline__body">
+            <p class="timeline__lead">{e.longDescription ?? e.description}</p>
+            <ul class="timeline__details">
+              {e.details.map((d) => (
+                <li><span class="timeline__detail-title">{d.title}</span>{d.text}</li>
+              ))}
+            </ul>
+            {e.technologies && <div class="tags">{e.technologies.map((t) => <span>{t.toUpperCase()}</span>)}</div>}
+          </div>
+        </details>
+      ))}
+    </div>
+    <div class="sec-foot micro">
+      <span>CLICK A ROW TO EXPAND</span>
+      <a href="#w-skills" class="skip">SKIP TO SKILLS ↓</a>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Animated accordion: the native <details> toggle is intercepted so the
+  // height, the body and the bullets can ease in/out instead of snapping.
+  const items = Array.from(document.querySelectorAll<HTMLDetailsElement>("#s-experience .timeline__item"));
+  const motion = matchMedia("(prefers-reduced-motion: reduce)");
+  const DURATION = 480;
+  const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+  const running = new Map<HTMLDetailsElement, Animation[]>();
+  const closing = new Set<HTMLDetailsElement>();
+
+  const stop = (item: HTMLDetailsElement) => {
+    running.get(item)?.forEach((a) => a.cancel());
+    running.delete(item);
+    closing.delete(item);
+  };
+
+  const finish = (item: HTMLDetailsElement) => {
+    item.style.overflow = "";
+    running.delete(item);
+    closing.delete(item);
+  };
+
+  const animate = (item: HTMLDetailsElement, from: number, to: number, fade: Keyframe[]) => {
+    const body = item.querySelector<HTMLElement>(".timeline__body")!;
+    const duration = motion.matches ? 0 : DURATION;
+    item.style.overflow = "hidden";
+    const height = item.animate([{ height: `${from}px` }, { height: `${to}px` }], { duration, easing: EASE });
+    const content = body.animate(fade, { duration, easing: EASE });
+    running.set(item, [height, content]);
+    return height;
+  };
+
+  const expand = (item: HTMLDetailsElement) => {
+    stop(item);
+    const from = item.offsetHeight;
+    item.open = true;
+    const to = item.offsetHeight;
+    animate(item, from, to, [
+      { opacity: 0, transform: "translateY(-8px)" },
+      { opacity: 1, transform: "none" },
+    ]).onfinish = () => finish(item);
+
+    if (!motion.matches) {
+      item.querySelectorAll<HTMLElement>(".timeline__details li").forEach((li, i) =>
+        li.animate(
+          [
+            { opacity: 0, transform: "translateY(8px)" },
+            { opacity: 1, transform: "none" },
+          ],
+          { duration: DURATION * 0.6, delay: 120 + i * 60, easing: EASE, fill: "backwards" },
+        ),
+      );
+    }
+  };
+
+  const collapse = (item: HTMLDetailsElement) => {
+    stop(item);
+    const body = item.querySelector<HTMLElement>(".timeline__body")!;
+    const from = item.offsetHeight;
+    const to = from - body.offsetHeight;
+    closing.add(item);
+    animate(item, from, to, [
+      { opacity: 1, transform: "none" },
+      { opacity: 0, transform: "translateY(-8px)" },
+    ]).onfinish = () => {
+      item.open = false;
+      finish(item);
+    };
+  };
+
+  items.forEach((item) => {
+    item.querySelector("summary")!.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (item.open && !closing.has(item)) {
+        collapse(item);
+        return;
+      }
+      items.forEach((other) => {
+        if (other !== item && other.open && !closing.has(other)) collapse(other);
+      });
+      expand(item);
+    });
+  });
+</script>

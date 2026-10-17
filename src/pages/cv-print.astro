@@ -1,0 +1,123 @@
+---
+// A4 print version of the CV, rendered to /cv.pdf at build time (scripts/generate-pdf.mjs).
+import cv from "../../data/cv-data.json";
+
+const { personalInfo: info, summary, experiences, projects, skills, education } = cv;
+const contacts = [info.email, info.phone, info.location, info.github, info.linkedin].filter(Boolean);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{info.name} — CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sheet">
+      <header>
+        <div class="name"><span class="mark"></span>{info.name}</div>
+        <div class="title">{info.title.toUpperCase()}</div>
+        <div class="contacts">{contacts.map((c) => <span>{c}</span>)}</div>
+      </header>
+
+      <p class="summary">{summary}</p>
+
+      <section>
+        <h2><span>01</span>Experience</h2>
+        {experiences.map((e) => (
+          <div class="item">
+            <div class="item__head">
+              <div>
+                <h3>{e.title}</h3>
+                <div class="sub">{[e.company, e.location].filter(Boolean).join(" · ")}</div>
+              </div>
+              <div class="period">{e.period}</div>
+            </div>
+            <p>{e.description}</p>
+            <ul>{e.details.map((x) => <li><b>{x.title}:</b> {x.text}</li>)}</ul>
+            {e.technologies && <div class="tags">{e.technologies.map((t) => <span>{t}</span>)}</div>}
+          </div>
+        ))}
+      </section>
+
+      <section>
+        <h2><span>02</span>Projects</h2>
+        <div class="grid">
+          {projects.map((p) => (
+            <div class="project">
+              <h3>{p.title}</h3>
+              <p>{p.description}</p>
+              <div class="tags">{p.technologies.slice(0, 4).map((t) => <span>{t}</span>)}</div>
+              <div class="sub">{p.github}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="cols">
+        <section>
+          <h2><span>03</span>Skills</h2>
+          {skills.map((s) => (
+            <div class="skill">
+              <span class="cat">{s.category.toUpperCase()}</span>
+              <span>{s.items.join(" · ")}</span>
+            </div>
+          ))}
+        </section>
+        <section>
+          <h2><span>04</span>Education</h2>
+          {education.map((e) => (
+            <div class="item">
+              <div class="item__head">
+                <div>
+                  <h3>{e.degree}</h3>
+                  <div class="sub">{e.school} · {e.location}</div>
+                </div>
+                <div class="period">{e.period}</div>
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  @page { size: A4; margin: 12mm; }
+  body { margin: 0; background: #fff; color: #14181f; font-family: "DM Mono", ui-monospace, monospace; font-size: 8.5px; line-height: 1.5; letter-spacing: 0.02em; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { max-width: 186mm; margin: 0 auto; }
+  h2, h3, p { margin: 0; }
+  header { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1.5px solid #14181f; }
+  .name { display: flex; align-items: center; gap: 10px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 600; font-size: 30px; line-height: 1; letter-spacing: -0.01em; }
+  .mark { width: 16px; height: 16px; border: 1.5px solid #14181f; border-radius: 50%; position: relative; }
+  .mark::after { content: ""; position: absolute; inset: 3.5px; background: #cf3510; border-radius: 50%; }
+  .title { margin-top: 6px; color: #cf3510; font-size: 9px; letter-spacing: 0.24em; }
+  .contacts { display: flex; flex-wrap: wrap; gap: 2px 16px; margin-top: 6px; color: #5d636e; }
+  .summary { color: #4a505b; margin-bottom: 12px; }
+  section { margin-bottom: 12px; break-inside: avoid; }
+  h2 { display: flex; align-items: baseline; gap: 8px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+  h2 span { color: #cf3510; font-family: "DM Mono", monospace; font-size: 8px; font-weight: 400; }
+  h3 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 600; font-size: 11px; line-height: 1.2; }
+  .item { padding: 6px 0 6px 10px; border-left: 1.5px solid #d2cdc1; margin-bottom: 4px; break-inside: avoid; }
+  .item__head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 2px; }
+  .item p, .project p, .item li { color: #4a505b; }
+  .item ul { margin: 2px 0 0; padding-left: 12px; }
+  .item b { color: #14181f; font-weight: 500; }
+  .sub { color: #5d636e; font-size: 8px; letter-spacing: 0.08em; }
+  .period { color: #5d636e; white-space: nowrap; font-size: 8px; letter-spacing: 0.12em; }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .tags span { border: 1px solid #bfbaae; padding: 0 6px; font-size: 7.5px; letter-spacing: 0.1em; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .project { border: 1px solid #14181f; padding: 8px; display: flex; flex-direction: column; gap: 4px; break-inside: avoid; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .skill { display: flex; flex-direction: column; margin-bottom: 4px; }
+  .cat { color: #cf3510; font-size: 7.5px; letter-spacing: 0.22em; }
+</style>

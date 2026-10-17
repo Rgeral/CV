@@ -1,133 +1,437 @@
 {
   "personalInfo": {
     "name": "Robin Geral",
-    "title": "Développeur Full Stack",
+    "title": "Full Stack Developer",
     "email": "rgeral.pro@gmail.com",
     "phone": "+33 6 35 52 43 28",
     "location": "Lyon, France",
     "linkedin": "linkedin.com/in/robin-geral",
     "github": "github.com/rgeral",
-    "website": "votre-site.com"
+    "website": "robin-geral.dev"
   },
-  "summary": "Développeur passionné avec X années d'expérience dans le développement d'applications web modernes. Spécialisé en React, Next.js et Node.js.",
+  "summary": "Passionate and self-driven Full-Stack Engineer with a non-traditional background, strong curiosity, and a constant drive to learn. Combining technical ownership with a solid foundation from École 42, I thrive on complex technical challenges in fast-paced environments.",
   "experiences": [
     {
       "id": "exp-1",
-      "title": "Développeur Full Stack",
-      "company": "Slib",
+      "years": "JAN 2026 — PRESENT",
+      "title": "Software Engineering Team Lead",
+      "company": "SLIB · CDI",
       "location": "Lyon, France",
-      "period": "Jan 2025 - present",
-      "description": "Développement d'applications web Angular | Java",
+      "period": "January 2026 - Present",
+      "description": "I lead a 6-person team, driving agile development and proactively modernizing technical workflows.",
+      "longDescription": "I lead an agile engineering team of 6, driving the end-to-end delivery of new applications while proactively modernizing the company's technical workflows. Balancing technical leadership and engineering management, I oversee sprint execution and resource allocation across multiple concurrent projects.",
       "details": [
-        "Création from scratch d'une application web complète pour la gestion du vote CSE",
-        "Choix des technologies adaptées aux besoins du projet",
-        "Gestion de projet, travail d'équipe",
-        "Mise en production dans un environnement sécurisé"
+        {
+          "title": "Engineering Leadership",
+          "text": "Manage sprint planning, ticket lifecycles, and team resources across several simultaneous projects to ensure predictable delivery."
+        },
+        {
+          "title": "High-Compliance",
+          "text": "Led the architecture and development of a new online voting platform, designed under strict data privacy and GDPR constraints."
+        },
+        {
+          "title": "DevOps & CI/CD",
+          "text": "Spearheaded the modernization of our infrastructure by designing and delivering a Proof of Concept (POC) for a new CI/CD pipeline using Kubernetes, Helm, and ArgoCD."
+        },
+        {
+          "title": "Workflow Optimization",
+          "text": "Actively pitch and implement innovative technical solutions to continuously improve the team's engineering practices and delivery speed."
+        },
+        {
+          "title": "AI & Automation",
+          "text": "Built AI agents (including sub-agent architectures) to automate recurring workflows and standardize technical documentation."
+        }
       ],
-      "technologies": ["Angular", "Java", "SpringBoot", "PostgreSQL", "Docker", "Jenkins", "XlDeploy"]
+      "technologies": [
+        "Spring",
+        "Angular",
+        "PostgreSQL",
+        "Docker"
+      ]
     },
     {
       "id": "exp-2",
-      "title": "Développeur Stagiaire",
-      "company": "Bill Apps",
+      "years": "JAN 2025 — JAN 2026",
+      "title": "Full-Stack Software Engineer",
+      "company": "SLIB · APPRENTICESHIP",
       "location": "Lyon, France",
-      "period": "juil 2024 - jan 2025",
-      "description": "Création d'interfaces utilisateur modernes et responsives",
+      "period": "January 2025 - January 2026",
+      "description": "Took full technical ownership of building a web application from scratch, driving architecture and deployment.",
+      "longDescription": "As a Full-Stack Software Engineer Apprentice, I took full ownership of designing and building a web application from scratch, operating with a high degree of autonomy. Working independently, I was responsible for the end-to-end software lifecycle. I defined the core architecture, made critical technical trade-offs, and proposed scalable solutions to ensure the platform met business requirements effectively. Beyond core development, I managed the entire release process, bridging the gap between initial concept and successful production deployment.",
       "details": [
-        "Développement de composants réutilisables avec React",
-        "Intégration d'APIs REST",
-        "Création d'une application mobile React Native",
-        "Acclimatation aux applications en microservices",
-        "Travail en méthode agile"
+        {
+          "title": "Full-Stack Dev",
+          "text": "Architected and built a comprehensive full-stack application from the ground up using Spring Boot and Angular."
+        },
+        {
+          "title": "Architecture",
+          "text": "Drove key architectural choices, balancing rapid delivery with long-term code maintainability."
+        },
+        {
+          "title": "Release & Deployment",
+          "text": "Owned the end-to-end deployment process, setting up the infrastructure and release workflows."
+        },
+        {
+          "title": "Problem Solving",
+          "text": "Proactively pitched and implemented technical solutions to address complex product needs."
+        }
       ],
-      "technologies": ["React", "Redux", "NodeJs", "ReactNative"]
+      "technologies": [
+        "Spring",
+        "Angular",
+        "PostgreSQL"
+      ]
     },
     {
       "id": "exp-3",
-      "title": "Militaire du rang",
-      "company": "Armée de Terre | 3ème RPIMA",
-      "location": "Carcassonne, France",
-      "period": "2020 -",
-      "description": "Travail d'équipe, discipline et résilience",
+      "years": "AUG 2024 — JAN 2025",
+      "title": "Full-Stack Software Engineer",
+      "company": "BILL · INTERNSHIP",
+      "location": "Lyon, France",
+      "period": "August 2024 - January 2025",
+      "description": "Worked on client-facing apps in a microservices ecosystem within an agile team.",
+      "longDescription": "During my 6-month internship as a Full-Stack Developer, I contributed to the continuous improvement of client-facing applications within a microservices architecture. Integrating a fast-paced environment, I gained hands-on experience with Agile methodologies and the complete ticket lifecycle.",
       "details": [
-        "Apprentissage des valeurs militaires fondamentales",
-        "Mise en oeuvre de stratégies de communication efficaces",
-        "Gestion du stress et adaptation rapide",
-        "Leadership et esprit d'équipe"
+        {
+          "title": "Maintenance & Features",
+          "text": "Maintained existing client applications, handling defect resolution and developing new features within a microservices ecosystem."
+        },
+        {
+          "title": "Agile",
+          "text": "Actively participated in Agile workflows, tracking issues and managing ticket resolution on a daily basis."
+        },
+        {
+          "title": "Custom Project Delivery",
+          "text": "Designed and developed a standalone application to track and manage customer wait times for a drive-thru queue system."
+        }
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "MariaDB"
+      ]
+    },
+    {
+      "id": "exp-4",
+      "years": "BEFORE 2024",
+      "title": "Earlier career",
+      "company": "ARMY · HOSPITALITY",
+      "period": "Before 2024",
+      "description": "A non-traditional path that built discipline, ownership and a sense of service.",
+      "longDescription": "Before transitioning into software engineering, I built a strong operational foundation, resilience, and adaptability through high-stakes and fast-paced environments.",
+      "details": [
+        {
+          "title": "Business Owner & Manager (Restaurant L'Aventure)",
+          "text": "Directed end-to-end operations, from business strategy and financial management to customer satisfaction and team leadership."
+        },
+        {
+          "title": "McDonald's (4-year progression)",
+          "text": "Started as a Crew Member and rapidly advanced to Team Leader. Managed daily high-volume operations, executed fast-paced shifts, and successfully trained and onboarded new staff members."
+        },
+        {
+          "title": "Military Paratrooper (3ème RPIMA)",
+          "text": "Cultivated rigorous discipline, adaptability, and high-performance teamwork while operating under extreme pressure."
+        }
       ]
     }
   ],
   "education": [
     {
       "id": "edu-1",
-      "degree": "Master en Informatique",
-      "school": "Université de Paris",
-      "location": "Paris, France",
-      "period": "2016 - 2018",
-      "description": "Spécialisation en développement web et architecture logicielle"
-    },
-    {
-      "id": "edu-2",
-      "degree": "Licence en Informatique",
-      "school": "Université de Lyon",
-      "location": "Lyon, France",
-      "period": "2013 - 2016"
+      "degree": "Master's Degree in IT Architecture (RNCP Level 7)",
+      "school": "42 School",
+      "location": "France",
+      "period": "2021 - 2023"
     }
   ],
   "projects": [
     {
       "id": "proj-1",
-      "title": "ChessClub",
-      "description": "Mise en place d'une application Web pour jouer aux échecs contre Stockfish, hébergement sur mon propre serveur.",
-      "technologies": ["Svelte", "Rust", "Sqlite", "Docker"],
-      "link": "chess.rdevs.fr",
-      "github": "github.com/rgeral/chess",
+      "title": "Chess Club",
+      "description": "A full-stack chess application built as a complete, self-hosted product: you play against Stockfish at several difficulty levels, your games and stats are tracked over time, and an estimated ELO reflects your progression. A Rust backend (Axum, async-graphql, SQLx on SQLite) exposes a GraphQL API, and a SvelteKit frontend served by Nginx consumes it. The whole stack runs in Docker Compose.",
+      "technologies": [
+        "Svelte",
+        "Rust",
+        "GraphQL",
+        "SQLite",
+        "Docker"
+      ],
+      "link": "https://chess.rdevs.fr",
+      "github": "github.com/Rgeral/chess",
       "highlights": [
-        "Envie d'apprendre de nouvelles technologies",
-        "Apprendre a heberger et deployer une application sur un serveur personnel",
-        "Optimisation des performances pour une expérience utilisateur fluide"
-      ]
+        "Built the full game loop in Rust: game creation, move validation, timers, results and persistence in SQLite",
+        "Integrated Stockfish over UCI, tuning skill level, think time and deliberate imperfections per difficulty",
+        "Tracked user profiles, per-level statistics, win streaks, play time and a leaderboard, with an estimated ELO derived from results",
+        "Shipped it self-hosted: Docker Compose stack, SQLite volume, Nginx frontend and an automated GitHub Actions deploy to my home server over WireGuard"
+      ],
+      "showcase": {
+        "order": 1,
+        "code": "PRJ.001 · FULLSTACK GAME",
+        "diagram": "D",
+        "zones": [
+          "01 · SVELTE + RUST",
+          "02 · GRAPHQL",
+          "03 · STOCKFISH",
+          "04 · SELF-HOSTED"
+        ],
+        "steps": [
+          {
+            "label": "LAYER 01 / 04 · SVELTE + RUST",
+            "text": "A Svelte interface with a responsive board, promotion dialog and timers, backed by a Rust server. I chose this pair on purpose to keep the architecture as light as possible in RAM and CPU: Svelte compiles to plain JavaScript with no heavy runtime, and Rust gives a small, predictable memory footprint. Static assets are served by Nginx."
+          },
+          {
+            "label": "LAYER 02 / 04 · API",
+            "text": "A GraphQL API (async-graphql) exposing createUser, createGame, makeMove, getUserProfile and getLeaderboard. Each resolver delegates to the game and stats services, which handle move legality, streaks and per-level statistics."
+          },
+          {
+            "label": "LAYER 03 / 04 · ENGINE",
+            "text": "Stockfish is driven over UCI. Difficulty maps to skill level, think time and deliberate imperfection, so weaker levels make realistic mistakes."
+          },
+          {
+            "label": "LAYER 04 / 04 · SELF-HOSTED",
+            "text": "I wanted a full self-hosted project: no managed cloud services, just containers on my own server. Docker Compose runs the backend, the frontend and the SQLite volume, and GitHub Actions deploys over WireGuard. I owned every layer, from the engine to the deployment."
+          }
+        ]
+      }
     },
     {
       "id": "proj-2",
-      "title": "Serveur de Streaming Multimédia",
-      "description": "Mise en place d'un serveur de streaming multimédia pour diffuser des films/séries via Plex",
-      "technologies": ["Script Bash", "Plex", "Docker", "Nginx", "cloudflare"],
+      "title": "MetaCulture — XRPL NFT Experience",
+      "description": "A proof of concept built during the XRPL Commons hackathon (3 to 5 May) for an art exhibition at the Centre Pompidou. The goal was to teach an AI the artist's data so it could take the artist's place and let visitors talk with it about the works. Access to the AI is gated by an NFT used as an access token, with an alternative for visitors without a crypto wallet: they can sign in with a simple email address.",
+      "technologies": [
+        "XRPL",
+        "Node.js",
+        "React",
+        "AI",
+        "NFT"
+      ],
+      "link": "https://github.com/Rgeral/MetaCulture",
+      "github": "github.com/Rgeral/MetaCulture",
       "highlights": [
-        "Comprendre les bases du streaming multimédia",
-        "Communication entre 6 services différents",
-        "Mise en place d'un système sécurisé et performant pour plusieurs utilisateurs"
-      ]
+        "Gated access to the AI experience with an NFT on the XRPL, used as a digital access token",
+        "Built a fallback login with email for visitors who do not have a digital wallet, so the experience stays accessible",
+        "Trained an AI on the artist's data so it could speak in the artist's place and guide visitors through the works in conversation",
+        "Connected the XRPL, Xaman wallet, Pinata, Brevo (transactional email) and Predibase (AI platform) in one Docker Compose stack",
+        "Worked in a four-person team during the hackathon, with a Make-driven build and run workflow"
+      ],
+      "showcase": {
+        "order": 2,
+        "code": "PRJ.002 · HACKATHON · XRPL",
+        "diagram": "A",
+        "zones": [
+          "MOBILE · WALLET",
+          "KIOSK · AI GUIDE",
+          "SCREEN · EXHIBIT"
+        ],
+        "steps": [
+          {
+            "label": "VIEW 01 / 03 · NFT ACCESS",
+            "text": "An NFT on the XRPL acts as the access token to the AI experience, with wallet sign-in through Xaman. Visitors without a wallet can instead sign in with an email address, which keeps the exhibition open to everyone."
+          },
+          {
+            "label": "VIEW 02 / 03 · AI GUIDE",
+            "text": "An AI model trained on the artist's own data, served through Predibase, takes the artist's place in the exhibition: visitors ask questions and explore the works in conversation, as if the artist were guiding them."
+          },
+          {
+            "label": "VIEW 03 / 03 · EXHIBITION",
+            "text": "The whole PoC runs as a Docker Compose stack, built and started with Make, so it can be deployed quickly for an exhibition. It explores how creative technology can make blockchain access feel simple for visitors."
+          }
+        ]
+      }
     },
     {
       "id": "proj-3",
-      "title": "Projet en cours : RunInColor",
-      "description": "Création d'une application mobile de running ludique et colorée pour encourager l'activité physique.",
-      "technologies": ["Dart", "Go", "Docker"],
-      "link": "https://github.com/Rgeral/RuninColor",
+      "title": "Aléas — Randomized Theatre Experience",
+      "description": "An improvised theatre show where the actors hand their fate to chance: staging, sound, light and timing are all controlled at random by a computer, and the performers have to adapt live. It was built to experiment with randomness in improvised theatre and to bridge theatre and the science of chance. I worked on the system that generates these random scenes, music and light sequences, while keeping enough structure that the show still holds together on stage.",
+      "technologies": [
+        "TypeScript",
+        "Next.js",
+        "Creative Tech",
+        "Algorithms",
+        "Theatre"
+      ],
+      "link": "https://github.com/PierreLemmel/plml-shows-api",
+      "github": "github.com/PierreLemmel/plml-shows-api",
       "highlights": [
-        "Découverte nouvelles technologies mobiles",
-        "Hébergement d'une API en Go",
-        "Perfectionnement CI et test unitaires"
-      ]
+        "Built the random generation logic for scenes, music and light cues, with weighted templates and random durations and fades",
+        "Made the lighting feel coherent despite randomness: light scenes chase across the fixtures in sequences with timed fades, so even chance-driven changes read as intentional",
+        "Scheduled background music at random intervals and tracks, so the performers have to react to sound they cannot anticipate",
+        "Applied creative programming to a live show presented at the Avignon Festival"
+      ],
+      "showcase": {
+        "order": 3,
+        "code": "PRJ.003 · CREATIVE TECH",
+        "diagram": "C",
+        "glyph": "⚄",
+        "zones": [
+          "RANDOM SEED",
+          "CUES",
+          "SCENE STATES"
+        ],
+        "steps": [
+          {
+            "label": "PART 01 / 03 · RANDOM SEED",
+            "text": "The computer draws the shape of each performance: random durations for each scene, random fades and random scene choices, so no two shows follow the same structure. The performers have to adapt to whatever comes next."
+          },
+          {
+            "label": "PART 02 / 03 · LIGHT & SOUND",
+            "text": "Music appears intermittently, at random times and from random tracks, so it can cut into a scene without warning. In the meantime the lights keep a coherent pattern: during a moment of intensity, the light scenes chase across the fixtures in timed sequences, with smooth fades that keep the stage readable even when the cues are random."
+          },
+          {
+            "label": "PART 03 / 03 · SCENE STATES",
+            "text": "The lights are driven over DMX512 from a generated show file, so the random scene states run live on the stage. The performers improvise against a stage that is random but never incoherent, which is what gives the piece its tension."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proj-4",
+      "title": "Defense Hackathon — Drone Detection",
+      "description": "A defense hackathon project held in Paris (7 to 9 November 2025) on the Synteza-1 challenge: detecting and tracking small FPV drones with cameras and AI, in real time, at about 500 metres and without human intervention. The project covers a full pipeline, from dataset preparation to a YOLO detection model, and a Next.js monitoring dashboard that places each detection on a map and raises danger alerts.",
+      "technologies": [
+        "Python",
+        "YOLO",
+        "Next.js",
+        "Computer Vision",
+        "AI"
+      ],
+      "link": "https://github.com/Rgeral/hackatonParis/tree/develop",
+      "github": "github.com/Rgeral/hackatonParis",
+      "highlights": [
+        "Built a YOLOv8s detection pipeline for a single 'Drone' class, fine-tuned from pretrained weights on a labelled dataset of about 2,500 positive and 1,000 negative images",
+        "Prepared the data with a reproducible 70/20/10 train/val/test split (fixed seed) and augmented the training set with flips, rotations, scaling, perspective, blur, noise and brightness changes",
+        "Configured training through environment variables (device auto-detection GPU/CPU, mixed precision, disk cache, early stopping, checkpoints), with the Makefile driving split, augmentation, training and prediction",
+        "Created a Next.js dashboard that polls the latest detections, shows annotated frames and estimates each drone's position from the camera and bounding box, with danger alerts and browser notifications",
+        "Delivered the full pipeline end to end within the hackathon sprint, aiming at the challenge target of 50% detection accuracy"
+      ],
+      "showcase": {
+        "order": 4,
+        "code": "PRJ.004 · HACKATHON · DEFENSE",
+        "diagram": "B",
+        "zones": [
+          "CAMERA FEED",
+          "DETECTIONS",
+          "THREAT LEVEL"
+        ],
+        "steps": [
+          {
+            "label": "TRACK 01 / 03 · DETECTION",
+            "text": "A YOLOv8s model fine-tuned to detect drones in camera frames. The dataset is split 70/20/10 with a fixed seed, and the training set is augmented with flips, rotations, scaling, perspective, blur, noise and brightness changes so the model copes with real-world variation."
+          },
+          {
+            "label": "TRACK 02 / 03 · DASHBOARD",
+            "text": "A Next.js dashboard receives each detection from the Python pipeline, shows the annotated frame and estimates the drone's position on a map from the camera location and bounding box, with a bearing toward the observer. Danger alerts appear in the interface and as browser notifications."
+          },
+          {
+            "label": "TRACK 03 / 03 · SPRINT",
+            "text": "Built within a single hackathon sprint on the Synteza-1 challenge: a pipeline from dataset to live monitoring, reproducible through a Makefile, with a clear path to a more robust, real-time system."
+          }
+        ]
+      }
     }
   ],
   "skills": [
     {
       "category": "Frontend",
-      "items": ["Angular", "React", "Svelte", "Dart"]
+      "items": [
+        "Angular",
+        "React",
+        "Svelte",
+        "Dart"
+      ]
     },
     {
       "category": "Backend",
-      "items": ["Node.js", "Express", "Java", "SpringBoot", "Rust", "Go"]
+      "items": [
+        "Node.js",
+        "Express",
+        "Java",
+        "Spring Boot",
+        "Rust",
+        "Go"
+      ]
     },
     {
       "category": "DevOps & Tools",
-      "items": ["Git", "Docker", "CI/CD", "Jenkins", "XlDeploy"]
+      "items": [
+        "Git",
+        "Docker",
+        "CI/CD",
+        "Jenkins",
+        "XlDeploy"
+      ]
     },
     {
-      "category": "Langues",
-      "items": ["Français (Natif)", "Anglais (Courant)"]
+      "category": "Languages",
+      "items": [
+        "French (Native)",
+        "English (Proficient)"
+      ]
     }
-  ]
+  ],
+  "portfolio": {
+    "edition": "2026",
+    "established": "2024",
+    "builtWith": "ASTRO · TYPESCRIPT · DOCKER",
+    "pitch": {
+      "lead": "I don't stop at the pull request;",
+      "accent": "I build, ship, and run it end to end."
+    },
+    "degree": "MASTER'S DEGREE IN IT ARCHITECTURE (RNCP LEVEL 7) — 42 SCHOOL, 2021–2023",
+    "skills": [
+      {
+        "cat": "FRONTEND",
+        "items": [
+          { "name": "Angular", "level": 90 },
+          { "name": "React", "level": 80 },
+          { "name": "Svelte", "level": 80 },
+          { "name": "TypeScript" }
+        ]
+      },
+      {
+        "cat": "BACKEND",
+        "items": [
+          { "name": "Java", "level": 85 },
+          { "name": "Spring Boot", "level": 85 },
+          { "name": "Node.js", "level": 70 },
+          { "name": "Rust", "level": 70 },
+          { "name": "Python" }
+        ]
+      },
+      {
+        "cat": "DATABASE",
+        "items": [
+          { "name": "PostgreSQL", "level": 80 },
+          { "name": "SQLite", "level": 65 },
+          { "name": "GraphQL", "level": 65 },
+          { "name": "MariaDB" }
+        ]
+      },
+      {
+        "cat": "DEVOPS",
+        "items": [
+          { "name": "Docker", "level": 80 },
+          { "name": "Kubernetes" },
+          { "name": "Jenkins", "level": 70 },
+          { "name": "XlDeploy", "level": 70 }
+        ]
+      },
+      {
+        "cat": "AI TOOLS",
+        "items": [
+          { "name": "Claude Code" },
+          { "name": "Prompt engineering" },
+          { "name": "Agentic code" }
+        ]
+      },
+      {
+        "cat": "PRACTICES",
+        "items": [
+          { "name": "Clean Code" },
+          { "name": "Code review" },
+          { "name": "Agile / Scrum" }
+        ]
+      }
+    ]
+  }
 }

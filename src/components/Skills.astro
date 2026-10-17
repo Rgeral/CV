@@ -1,0 +1,27 @@
+---
+import { portfolio } from "../lib";
+---
+
+<div id="w-skills" class="pin pin--flow" style="--len: 1.6">
+  <section id="s-skills">
+    <div class="sec-title"><span>04</span><h2 class="display">Skills</h2></div>
+    <div class="skills">
+      {portfolio.skills.map((g) => (
+        <div class="skill-group card card--shadow">
+          <span class="skill-group__cat">{g.cat}</span>
+          <ul class="skill-group__list">
+            {g.items.map((s) => (
+              <li class="skill-row">
+                <span class="skill-row__name display">{s.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="sec-foot micro">
+      <span></span>
+      <a href="#w-contact" class="skip">SKIP TO LET'S CHAT ↓</a>
+    </div>
+  </section>
+</div>

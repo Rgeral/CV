@@ -1,0 +1,61 @@
+---
+import Diagram from "./Diagram.astro";
+import { projects, url } from "../lib";
+
+const total = String(projects.length).padStart(2, "0");
+---
+
+<!-- Each project takes one scroll segment: 3 steps, then a slide to the next one -->
+<div id="w-projects" class="pin" style={`--len: ${1 + projects.length * 1.6}`}>
+  <section id="s-projects">
+    <div class="sec-title"><span>02</span><h2 class="display">Projects</h2></div>
+    <div class="stage card">
+      {projects.map((p, i) => (
+        <article
+          class="slide"
+          data-slide={i}
+          data-step="0"
+          data-steps={p.showcase.steps.length}
+          style={i === 0 ? "" : "transform:translateX(100%) scale(.94);opacity:.15"}
+        >
+          <div class="slide__head micro">
+            <span><span class="accent">●</span> {p.showcase.code}</span>
+            <span>STEP <span data-step-no>01</span> / <span data-step-total>{String(p.showcase.steps.length).padStart(2, "0")}</span> · SCROLL ↓</span>
+          </div>
+          <ol class="psteps" style={`--n:${p.showcase.steps.length}`} aria-label="Project progress">
+            {p.showcase.steps.map((s, j) => (
+              <li class="pstep" style={`--j:${j}`}>
+                <span class="pstep__label micro">{s.label.replace(/^[A-Z]+ \d+ \/ \d+ · /, "")}</span>
+                <span class="pstep__bar"><span></span></span>
+              </li>
+            ))}
+          </ol>
+          <div class="slide__visual">
+            <Diagram showcase={p.showcase} />
+          </div>
+          <div class="slide__caption">
+            <div class="slide__title">
+              <a href={url(p.link)} target="_blank" rel="noopener" class="display">{p.title} ↗</a>
+              <div class="tags">{p.technologies.slice(0, 3).map((t) => <span>{t.toUpperCase()}</span>)}</div>
+            </div>
+            <div class="caps">
+              {p.showcase.steps.map((s, j) => (
+                <div class={`cap cap--${j}`}>
+                  <span class="cap__label">{s.label}</span>
+                  <p>{s.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="sec-foot micro">
+      <span class="stage-foot__progress">
+        <span><span data-slide-label>01</span> / {total}</span>
+        <span class="stage-foot__bar"><span data-projects-bar></span></span>
+      </span>
+      <a href="#w-experience" class="skip">SKIP TO EXPERIENCE ↓</a>
+    </div>
+  </section>
+</div>

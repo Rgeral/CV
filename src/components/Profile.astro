@@ -1,0 +1,31 @@
+---
+import { info, portfolio, summary, NAME, REGION } from "../lib";
+---
+
+<div id="w-profile" class="pin pin--flow" style="--len: 1.6">
+  <section id="s-profile">
+    <div class="sec-title"><span>01</span><h2 class="display">Profile</h2></div>
+    <div class="profile card card--shadow">
+      <div class="profile__id">
+        <div class="micro"><span>SUBJECT.ID</span><span>DOSSIER</span></div>
+        <div class="profile__photo">
+          <img src="/robin-geral.jpg" alt={`Portrait of ${info.name}`} width="956" height="1092" />
+        </div>
+        <div class="micro"><span>{NAME}</span><span>{REGION}</span></div>
+      </div>
+      <div class="profile__body">
+        <p class="profile__pitch display">{portfolio.pitch.lead} <span class="accent">{portfolio.pitch.accent}</span></p>
+        <p class="profile__summary">{summary}</p>
+        <p class="profile__degree">{portfolio.degree}</p>
+        <div class="row">
+          <a href="/cv.pdf" download="Robin-Geral-CV.pdf" class="btn btn--solid">RESUME DOWNLOAD ↓</a>
+          <a href="#w-projects" class="btn btn--ghost">VIEW WORK ↓</a>
+        </div>
+      </div>
+    </div>
+    <div class="sec-foot micro">
+      <span></span>
+      <a href="#w-projects" class="skip">SKIP TO PROJECTS ↓</a>
+    </div>
+  </section>
+</div>

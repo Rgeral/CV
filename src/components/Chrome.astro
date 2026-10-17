@@ -1,0 +1,35 @@
+---
+import { info, portfolio, NAME, REGION, sections } from "../lib";
+---
+
+<!-- Enter screen: hidden on click or after 4s, no JS needed -->
+<input type="checkbox" id="enter-cb" class="enter-cb" aria-hidden="true" tabindex="-1" />
+<div class="enter-screen">
+  <div class="enter-screen__inner">
+    <div class="enter-screen__name display"><span class="mark mark--lg"></span>{info.name}</div>
+    <div class="label">PORTFOLIO · EDITION {portfolio.edition}</div>
+    <div class="enter-screen__rule"></div>
+    <div class="label">EST. {portfolio.established} · {REGION}</div>
+    <div class="label">BUILT WITH {portfolio.builtWith}</div>
+    <label for="enter-cb" class="btn btn--solid">ENTER →</label>
+  </div>
+</div>
+
+<!-- Fixed frame: corner marks, side labels, drifting rule -->
+<div class="frame" aria-hidden="true">
+  <div class="frame__corner frame__corner--tl"></div>
+  <div class="frame__corner frame__corner--tr"></div>
+  <div class="frame__corner frame__corner--bl"></div>
+  <div class="frame__corner frame__corner--br"></div>
+  <div class="frame__side frame__side--left">{NAME} / {REGION} / EST. {portfolio.established}</div>
+  <div class="frame__side frame__side--right">KEEP SCROLLING</div>
+  <div class="frame__drift"></div>
+</div>
+
+<header class="topbar">
+  <a href="#w-hero" class="topbar__brand display"><span class="mark"></span>{info.name}</a>
+  <nav class="topbar__nav" aria-label="Sections">
+    {sections.map((s) => <a href={`#w-${s.key}`} data-nav={s.key}>{s.label}</a>)}
+  </nav>
+  <span class="topbar__status"><span class="blink">●</span> OPEN TO WORK</span>
+</header>
