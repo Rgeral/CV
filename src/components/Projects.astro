@@ -20,18 +20,24 @@ const total = String(projects.length).padStart(2, "0");
         >
           <div class="slide__head micro">
             <span><span class="accent">●</span> {p.showcase.code}</span>
-            <span>STEP <span data-step-no>01</span> / <span data-step-total>{String(p.showcase.steps.length).padStart(2, "0")}</span> · SCROLL ↓</span>
+            <span>STEP <span class="step-no" data-step-no>01</span> / <span data-step-total>{String(p.showcase.steps.length).padStart(2, "0")}</span></span>
           </div>
-          <ol class="psteps" style={`--n:${p.showcase.steps.length}`} aria-label="Project progress">
-            {p.showcase.steps.map((s, j) => (
-              <li class="pstep" style={`--j:${j}`}>
-                <span class="pstep__label micro">{s.label.replace(/^[A-Z]+ \d+ \/ \d+ · /, "")}</span>
-                <span class="pstep__bar"><span></span></span>
-              </li>
-            ))}
-          </ol>
-          <div class="slide__visual">
-            <Diagram showcase={p.showcase} />
+          <div class="slide__body">
+            <div class="slide__visual">
+              <Diagram showcase={p.showcase} />
+              <span class="scroll-hint micro" aria-hidden="true"><span>SCROLL</span><i></i></span>
+            </div>
+            <ol class="rail" style={`--n:${p.showcase.steps.length}`} aria-label="Project progress">
+              {p.showcase.steps.map((s, j) => (
+                <li class="rail__item" style={`--j:${j}`}>
+                  <button type="button" class="rail__btn" data-jump={j} data-n={p.showcase.steps.length} data-i={i} aria-label={`Go to ${s.label}`}>
+                    <span class="rail__node"></span>
+                    <span class="rail__label micro">{s.label.replace(/^[A-Z]+ \d+ \/ \d+ · /, "")}</span>
+                  </button>
+                  <span class="rail__line"><span></span></span>
+                </li>
+              ))}
+            </ol>
           </div>
           <div class="slide__caption">
             <div class="slide__title">

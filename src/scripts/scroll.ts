@@ -50,7 +50,14 @@ function update() {
 
     el.style.transform = `translateX(${(d * 100).toFixed(2)}%) scale(${(1 - a * 0.06).toFixed(3)})`;
     el.style.opacity = (1 - a * 0.85).toFixed(2);
+    if (el.dataset.step !== String(step)) {
+      const no = el.querySelector<HTMLElement>("[data-step-no]")!;
+      no.classList.remove("bump");
+      void no.offsetWidth;
+      no.classList.add("bump");
+    }
     el.dataset.step = String(step);
+    el.toggleAttribute("data-first", i === 0 && sec === PROJECTS && p < 0.05);
     el.style.setProperty("--local", local.toFixed(3));
     el.style.setProperty("--ph", `${(4 + local * 92).toFixed(1)}%`);
     el.toggleAttribute("inert", Math.abs(d) > 0.5);
@@ -67,6 +74,17 @@ const schedule = () => {
   queued = true;
   requestAnimationFrame(() => { queued = false; update(); });
 };
+
+// Click a rail node to jump to the middle of that step.
+document.querySelectorAll<HTMLElement>("[data-jump]").forEach((b) =>
+  b.addEventListener("click", () => {
+    const i = Number(b.dataset.i), j = Number(b.dataset.jump), n = Number(b.dataset.n);
+    const w = wraps[PROJECTS];
+    const span = Math.max(1, w.offsetHeight - stickies[PROJECTS].offsetHeight);
+    const top = w.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top + ((i + ((j + 0.5) / n) * 0.8) / count) * span, behavior: "smooth" });
+  }),
+);
 
 window.addEventListener("scroll", schedule, { passive: true });
 window.addEventListener("resize", schedule);
