@@ -1,0 +1,108 @@
+---
+// Drone detection: camera feed with a YOLO box tracking a drone, map + bearing, pipeline.
+const pipe = ["DATASET 70/20/10", "AUGMENT", "YOLOv8s TRAIN", "DETECT", "DASHBOARD"];
+const grid = Array.from({ length: 5 }, (_, i) => i);
+---
+
+<svg class="dr" viewBox="0 0 680 290" role="img" aria-label="Drone detection feed, map and pipeline">
+  <!-- 00 · camera feed -->
+  <g class="z z--0">
+    <text x="10" y="14" class="cap">CAMERA FEED</text>
+    <rect x="10" y="22" width="320" height="180" class="bx feedbg" />
+    {grid.map((i) => <path d={`M${10 + (i + 1) * 53} 22 V202`} class="gridl" />)}
+    <path d="M10 160 L70 135 L120 150 L190 120 L250 145 L330 125 V202 H10 Z" class="hills" />
+    <g class="scan"><rect x="10" y="22" width="3" height="180" /></g>
+    <g class="fly">
+      <g class="drone">
+        <path d="M-10 -6 L10 6 M10 -6 L-10 6" class="arm" />
+        <rect x="-4" y="-3" width="8" height="6" class="body" />
+        <circle cx="-10" cy="-6" r="4" class="rotor" /><circle cx="10" cy="-6" r="4" class="rotor" />
+        <circle cx="-10" cy="6" r="4" class="rotor" /><circle cx="10" cy="6" r="4" class="rotor" />
+      </g>
+      <g class="box">
+        <rect x="-22" y="-18" width="44" height="36" class="bb" />
+        <rect x="-22" y="-30" width="62" height="12" class="bbl" />
+        <text x="-18" y="-21" class="lbl">drone 0.91</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- 01 · map + bearing -->
+  <g class="z z--1">
+    <text x="350" y="14" class="cap">DASHBOARD · MAP</text>
+    <rect x="350" y="22" width="320" height="180" class="bx" />
+    <circle cx="510" cy="112" r="30" class="ring" /><circle cx="510" cy="112" r="60" class="ring" /><circle cx="510" cy="112" r="90" class="ring" />
+    <path d="M350 112 H670 M510 22 V202" class="gridl" />
+    <g transform="translate(510 184)">
+      <g class="sweep"><path d="M0 0 V-120" class="bear" /><circle cy="-120" r="6" class="tgt" /><circle cy="-120" r="6" class="ping" /></g>
+      <rect x="-5" y="-5" width="10" height="10" class="cam" />
+    </g>
+    <text x="520" y="198" class="sm">CAMERA</text>
+    <g class="alert">
+      <rect x="560" y="30" width="102" height="22" class="al-bg" />
+      <text x="611" y="45" class="sm wh" text-anchor="middle">⚠ DANGER · 31°</text>
+    </g>
+  </g>
+
+  <!-- 02 · pipeline -->
+  <g class="z z--2">
+    <text x="10" y="232" class="cap">MAKE · PIPELINE</text>
+    {pipe.map((p, i) => (
+      <g class="node" style={`--i:${i}`}>
+        <rect x={10 + i * 134} y="242" width="118" height="30" class="nbx" />
+        <text x={69 + i * 134} y="261" class="sm" text-anchor="middle">{p}</text>
+        {i < 4 && <path d={`M${128 + i * 134} 257 H${144 + i * 134}`} class="plink" />}
+      </g>
+    ))}
+  </g>
+</svg>
+
+<style>
+  .dr { width: min(100%, 720px); max-height: 100%; overflow: visible; font-family: var(--mono); }
+  text { font-family: var(--mono); fill: var(--ink); }
+  .z { --bc: var(--rule-2); --lc: var(--muted); --fl: var(--fill); opacity: 0.5; transition: opacity 0.35s; }
+  :global([data-step="0"]) .z--0, :global([data-step="1"]) .z--1, :global([data-step="2"]) .z--2 { --bc: var(--accent); --lc: var(--accent); --fl: var(--accent); opacity: 1; }
+  .cap { font-size: 9px; letter-spacing: 0.24em; fill: var(--lc); }
+  .sm { font-size: 9px; letter-spacing: 0.1em; }
+  .wh { fill: var(--white); }
+  .bx { fill: var(--white); stroke: var(--bc); stroke-width: 1.5; transition: stroke 0.35s; }
+  .feedbg { fill: var(--fill-3); }
+  .gridl { stroke: var(--rule); stroke-width: 0.8; stroke-dasharray: 2 4; fill: none; }
+  .hills { fill: var(--fill); }
+  .scan rect { fill: var(--accent); opacity: 0; }
+  :global([data-step="0"]) .scan rect { opacity: 0.5; animation: scan 3s linear infinite; }
+  @keyframes scan { from { transform: translateX(0); } to { transform: translateX(316px); } }
+
+  .fly { animation: fly 7s ease-in-out infinite alternate; }
+  @keyframes fly { 0% { transform: translate(70px, 70px); } 40% { transform: translate(170px, 50px); } 100% { transform: translate(270px, 95px); } }
+  .arm { stroke: var(--ink); stroke-width: 1.5; }
+  .body { fill: var(--ink); }
+  .rotor { fill: none; stroke: var(--ink); stroke-width: 1; transform-box: fill-box; transform-origin: center; animation: spin 0.25s linear infinite; stroke-dasharray: 5 3; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .bb { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+  .bbl { fill: var(--accent); }
+  .lbl { fill: var(--white); font-size: 8px; letter-spacing: 0.06em; }
+  .box { opacity: 0.25; transition: opacity 0.35s; }
+  :global([data-step="0"]) .box { opacity: 1; animation: lock 1s steps(2) infinite; }
+  @keyframes lock { 50% { opacity: 0.75; } }
+
+  .ring { fill: none; stroke: var(--rule); }
+  .bear { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 4 3; }
+  .tgt { fill: var(--accent); }
+  .ping { fill: none; stroke: var(--accent); animation: ping 1.4s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes ping { from { transform: scale(1); opacity: 1; } to { transform: scale(3.2); opacity: 0; } }
+  .cam { fill: var(--ink); }
+  .sweep { animation: sweep 7s ease-in-out infinite alternate; }
+  @keyframes sweep { 0% { transform: rotate(-16deg); } 40% { transform: rotate(-2deg); } 100% { transform: rotate(18deg); } }
+  .al-bg { fill: var(--accent); }
+  .alert { opacity: 0; transform: translateY(-6px); transition: opacity 0.3s, transform 0.3s; }
+  :global([data-step="1"]) .alert { opacity: 1; transform: none; animation: blink 1.2s steps(2) infinite 0.4s; }
+  :global([data-step="2"]) .alert { opacity: 0.5; transform: none; }
+  @keyframes blink { 50% { opacity: 0.7; } }
+
+  .nbx { fill: var(--white); stroke: var(--rule-2); stroke-width: 1.5; transition: stroke 0.35s, fill 0.35s; }
+  .plink { stroke: var(--rule-2); stroke-width: 1.5; }
+  :global([data-step="2"]) .nbx { stroke: var(--accent); animation: lit 4s ease-in-out infinite; animation-delay: calc(var(--i) * 0.6s); }
+  :global([data-step="2"]) .plink { stroke: var(--accent); }
+  @keyframes lit { 0%, 30%, 100% { fill: var(--white); } 12% { fill: var(--fill-2); } }
+</style>

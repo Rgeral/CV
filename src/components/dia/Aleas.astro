@@ -1,0 +1,74 @@
+---
+// Aléas: random scenes, intermittent music, chasing lights, DMX output.
+const scenes = [1.2, 2.1, 0.8, 1.6, 1.0, 1.9];
+const fixtures = Array.from({ length: 8 }, (_, i) => i);
+const cues = [8, 34, 41, 70];
+const dmx = Array.from({ length: 28 }, (_, i) => i);
+---
+
+<div class="al">
+  <div class="al__seed zone zone--0">
+    <span class="al__cap">RANDOM SEED</span>
+    <div class="al__die" aria-hidden="true">⚄</div>
+    <span class="al__sm">seed = 0x7F3A</span>
+  </div>
+
+  <div class="al__lanes">
+    <div class="lane lane--scenes zone zone--0">
+      <span class="lane__name">SCENES</span>
+      <div class="lane__track">
+        {scenes.map((g, i) => <span class="sc" style={`--g:${g};--i:${i};`}></span>)}
+      </div>
+    </div>
+    <div class="lane zone zone--1">
+      <span class="lane__name">MUSIC</span>
+      <div class="lane__track lane__track--rel">
+        {cues.map((x, i) => <span class="cue" style={`left:${x}%;width:${12 + i * 3}%;--i:${i}`}></span>)}
+        <span class="cue-cut"></span>
+      </div>
+    </div>
+    <div class="lane zone zone--1">
+      <span class="lane__name">LIGHTS</span>
+      <div class="lane__track lane__track--fx">
+        {fixtures.map((i) => <span class="fx" style={`--i:${i}`}></span>)}
+      </div>
+    </div>
+    <div class="lane zone zone--2">
+      <span class="lane__name">DMX512</span>
+      <div class="lane__track lane__track--dmx">
+        {dmx.map((i) => <span class="ch" style={`--i:${i};--s:${(0.8 + ((i * 37) % 17) / 12).toFixed(2)}s`}></span>)}
+      </div>
+    </div>
+    <div class="al__foot zone zone--2"><span>SHOW FILE.JSON</span><span>→</span><span>UNIVERSE 1 · 512 CH</span><span>→</span><span>STAGE</span></div>
+  </div>
+</div>
+
+<style>
+  .al { display: flex; gap: 20px; width: min(100%, 700px); align-items: stretch; font-family: var(--mono); }
+  .al__seed { flex: 0 0 clamp(96px, 17%, 130px); border: 1.5px solid var(--bc); background: var(--white); padding: 12px; display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; }
+  .al__cap, .lane__name { font-size: 8px; letter-spacing: 0.22em; color: var(--lc); }
+  .al__die { font-size: 56px; line-height: 1; color: var(--fl); transition: color 0.35s; }
+  :global([data-step="0"]) .al__die { animation: roll 1.8s cubic-bezier(0.3, 0.6, 0.3, 1) infinite; }
+  @keyframes roll { 0% { transform: rotate(0); } 35% { transform: rotate(200deg) scale(1.1); } 60%, 100% { transform: rotate(360deg); } }
+  .al__sm { font-size: 8px; letter-spacing: 0.12em; color: var(--muted); }
+  .al__lanes { flex: 1; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .lane { display: flex; flex-direction: column; gap: 4px; }
+  .lane__track { display: flex; gap: 4px; height: 34px; padding: 4px; box-sizing: border-box; border: 1.5px solid var(--bc); background: var(--white); transition: border-color 0.35s; }
+  .lane__track--rel { position: relative; display: block; }
+  .sc { flex: var(--g); background: var(--fl); opacity: 0.55; transition: background 0.35s; }
+  :global([data-step="0"]) .sc { animation: shuffle 2.8s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -0.5s); }
+  @keyframes shuffle { from { flex-grow: calc(var(--g) * 0.4); } to { flex-grow: calc(var(--g) * 1.8); } }
+  .cue { position: absolute; top: 4px; bottom: 4px; background: repeating-linear-gradient(90deg, var(--fl) 0 2px, transparent 2px 5px); opacity: 0.5; transition: opacity 0.3s; }
+  :global([data-step="1"]) .cue { animation: cue 3.2s steps(1) infinite; animation-delay: calc(var(--i) * -0.8s); }
+  @keyframes cue { 0%, 100% { opacity: 0.12; } 25%, 60% { opacity: 1; } }
+  .lane__track--fx { justify-content: space-between; align-items: center; }
+  .fx { width: 14px; height: 14px; border-radius: 50%; background: var(--fill-2); border: 1px solid var(--rule-2); }
+  :global([data-step="1"]) .fx { animation: chase 1.6s ease-in-out infinite; animation-delay: calc(var(--i) * 0.12s); }
+  @keyframes chase { 0%, 100% { background: var(--fill-2); box-shadow: none; } 15% { background: var(--accent); box-shadow: 0 0 10px var(--accent); } 35% { background: var(--fill-2); box-shadow: none; } }
+  .lane__track--dmx { align-items: flex-end; gap: 2px; }
+  .ch { flex: 1; height: 30%; background: var(--fl); transition: background 0.35s; }
+  :global([data-step="2"]) .ch { animation: lvl var(--s) ease-in-out infinite alternate; animation-delay: calc(var(--i) * -0.13s); }
+  @keyframes lvl { from { height: 12%; } to { height: 100%; } }
+  .al__foot { display: flex; justify-content: space-between; gap: 6px; font-size: 8px; letter-spacing: 0.16em; color: var(--lc); }
+  @media (max-width: 720px) { .al { flex-direction: column; } .al__seed { flex-direction: row; flex-basis: auto; } .al__die { font-size: 36px; } }
+</style>

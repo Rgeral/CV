@@ -1,0 +1,138 @@
+---
+// MetaCulture: three surfaces of the exhibition, each one comes alive on its step.
+const works = [0, 1, 2];
+---
+
+<svg class="meta" viewBox="0 0 680 290" role="img" aria-label="Phone wallet, AI guide kiosk and exhibition screen">
+  <!-- connectors -->
+  <path d="M168 150 H222" class="link link--0" />
+  <path d="M452 150 H506" class="link link--1" />
+
+  <!-- 01 · phone: NFT access -->
+  <g class="dev dev--0" transform="translate(24 24)">
+    <g class="lift">
+      <text x="72" y="-8" class="cap" text-anchor="middle">MOBILE · WALLET</text>
+      <rect x="0" y="0" width="144" height="250" rx="14" class="bx" />
+      <rect x="54" y="8" width="36" height="4" rx="2" class="fillbar" />
+      <!-- NFT card -->
+      <g class="nft">
+        <rect x="14" y="26" width="116" height="92" class="card" />
+        <circle cx="72" cy="62" r="18" class="orb" />
+        <path d="M60 62 L69 71 L85 53" class="check" />
+        <text x="72" y="98" class="sm" text-anchor="middle">ACCESS NFT</text>
+        <text x="72" y="110" class="xs mute" text-anchor="middle">XRPL · #0042</text>
+      </g>
+      <rect x="14" y="130" width="116" height="26" class="btn" />
+      <text x="72" y="147" class="sm wh" text-anchor="middle">SIGN · XAMAN</text>
+      <text x="72" y="176" class="xs mute" text-anchor="middle">— or no wallet —</text>
+      <rect x="14" y="186" width="116" height="20" class="field" />
+      <text x="22" y="199" class="xs mute">visitor@email.com</text>
+      <rect x="14" y="214" width="116" height="22" class="ghost" />
+      <text x="72" y="228" class="xs" text-anchor="middle">CONTINUE WITH EMAIL</text>
+    </g>
+  </g>
+
+  <!-- 02 · kiosk: AI guide -->
+  <g class="dev dev--1" transform="translate(222 24)">
+    <g class="lift">
+      <text x="115" y="-8" class="cap" text-anchor="middle">KIOSK · AI GUIDE</text>
+      <rect x="0" y="0" width="230" height="226" class="bx" />
+      <rect x="85" y="226" width="60" height="24" class="bx" />
+      <circle cx="22" cy="22" r="11" class="orb" />
+      <text x="40" y="20" class="sm">THE ARTIST</text>
+      <text x="40" y="31" class="xs mute">trained on their own data</text>
+      <path d="M0 42 H230" class="rule" />
+      <g class="msg msg--1">
+        <rect x="64" y="54" width="154" height="30" class="bub bub--v" />
+        <text x="72" y="73" class="xs">Why this blue, here?</text>
+      </g>
+      <g class="msg msg--2">
+        <rect x="12" y="94" width="188" height="48" class="bub" />
+        <text x="20" y="112" class="xs">I painted it the week the</text>
+        <text x="20" y="126" class="xs">studio flooded. It stayed.</text>
+      </g>
+      <g class="msg msg--3">
+        <rect x="12" y="152" width="46" height="24" class="bub" />
+        <circle cx="26" cy="164" r="2.5" class="td td--1" /><circle cx="35" cy="164" r="2.5" class="td td--2" /><circle cx="44" cy="164" r="2.5" class="td td--3" />
+      </g>
+      <rect x="12" y="192" width="206" height="22" class="field" />
+      <text x="20" y="206" class="xs mute">Ask the artist…</text>
+    </g>
+  </g>
+
+  <!-- 03 · screen: exhibition + stack -->
+  <g class="dev dev--2" transform="translate(506 24)">
+    <g class="lift">
+      <text x="75" y="-8" class="cap" text-anchor="middle">SCREEN · EXHIBIT</text>
+      <rect x="0" y="0" width="150" height="150" class="bx" />
+      {works.map((i) => (
+        <g>
+          <rect x={14 + i * 44} y={i === 1 ? 24 : 34} width="36" height={i === 1 ? 64 : 48} class={`art art--${i}`} />
+          <rect x={14 + i * 44} y={i === 1 ? 24 : 34} width="36" height={i === 1 ? 64 : 48} class="artframe" />
+        </g>
+      ))}
+      <path d="M0 110 H150" class="rule" />
+      <circle cx="24" cy="128" r="6" class="orb" />
+      <text x="38" y="131" class="xs">now: room 3</text>
+      <text x="75" y="172" class="cap" text-anchor="middle">DOCKER COMPOSE · MAKE</text>
+      <g class="stack">
+        <rect x="0" y="182" width="150" height="16" class="card" /><text x="8" y="193" class="xs">front · react</text><circle cx="140" cy="190" r="2.5" class="live" />
+        <rect x="0" y="202" width="150" height="16" class="card" /><text x="8" y="213" class="xs">api · node</text><circle cx="140" cy="210" r="2.5" class="live live--2" />
+        <rect x="0" y="222" width="150" height="16" class="card" /><text x="8" y="233" class="xs">pinata · brevo · ai</text><circle cx="140" cy="230" r="2.5" class="live live--3" />
+      </g>
+    </g>
+  </g>
+</svg>
+
+<style>
+  .meta { width: min(100%, 720px); max-height: 100%; overflow: visible; font-family: var(--mono); }
+  text { font-family: var(--mono); fill: var(--ink); }
+  .cap { font-size: 9px; letter-spacing: 0.24em; fill: var(--lc, var(--muted)); }
+  .sm { font-size: 10px; letter-spacing: 0.08em; }
+  .xs { font-size: 9px; letter-spacing: 0.04em; }
+  .mute { fill: var(--muted); }
+  .wh { fill: var(--white); }
+  .bx { fill: var(--white); stroke: var(--bc, var(--rule-2)); stroke-width: 1.5; transition: stroke 0.35s; }
+  .card { fill: var(--fill-3); stroke: var(--rule-2); stroke-width: 1; }
+  .field { fill: var(--white); stroke: var(--rule-2); stroke-width: 1; }
+  .ghost { fill: none; stroke: var(--bc, var(--rule-2)); stroke-width: 1.2; }
+  .btn { fill: var(--fl, var(--fill)); transition: fill 0.35s; }
+  .fillbar { fill: var(--fill-2); }
+  .orb { fill: var(--fl, var(--fill)); transition: fill 0.35s; }
+  .rule { stroke: var(--rule-2); fill: none; }
+  .check { stroke: var(--white); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40; stroke-dashoffset: 40; transition: stroke-dashoffset 0.6s 0.2s; }
+  .dev { --bc: var(--rule-2); --lc: var(--muted); --fl: var(--fill); opacity: 0.5; transition: opacity 0.35s; }
+  :global([data-step="0"]) .dev--0, :global([data-step="1"]) .dev--1, :global([data-step="2"]) .dev--2 { --bc: var(--accent); --lc: var(--accent); --fl: var(--accent); opacity: 1; }
+  .lift { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  :global([data-step="0"]) .dev--0 .lift, :global([data-step="1"]) .dev--1 .lift, :global([data-step="2"]) .dev--2 .lift { transform: translateY(-6px); }
+  :global([data-step="0"]) .check { stroke-dashoffset: 0; }
+  :global([data-step="0"]) .nft { animation: float 2.4s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-3px); } }
+
+  .link { stroke: var(--rule-2); stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+  :global([data-step="1"]) .link--0, :global([data-step="2"]) .link--0 { stroke: var(--accent); animation: dash 0.8s linear infinite; }
+  :global([data-step="2"]) .link--1 { stroke: var(--accent); animation: dash 0.8s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -9; } }
+
+  .bub { fill: var(--fill-3); stroke: var(--rule-2); }
+  .bub--v { fill: var(--white); stroke: var(--accent); }
+  .msg { opacity: 0; transform: translateY(8px); }
+  :global([data-step="1"]) .msg { opacity: 1; transform: none; transition: opacity 0.4s, transform 0.4s; }
+  :global([data-step="1"]) .msg--1 { transition-delay: 0.1s; }
+  :global([data-step="1"]) .msg--2 { transition-delay: 0.7s; }
+  :global([data-step="1"]) .msg--3 { transition-delay: 1.4s; }
+  :global([data-step="2"]) .msg, :global([data-step="3"]) .msg { opacity: 0.6; transform: none; }
+  .td { fill: var(--accent); animation: tdot 1s ease-in-out infinite; }
+  .td--2 { animation-delay: 0.15s; } .td--3 { animation-delay: 0.3s; }
+  @keyframes tdot { 50% { transform: translateY(-3px); opacity: 0.4; } }
+
+  .art--0 { fill: var(--fill); } .art--1 { fill: var(--fl, var(--fill)); } .art--2 { fill: var(--fill-2); }
+  .artframe { fill: none; stroke: var(--ink); stroke-width: 1.2; }
+  .live { fill: var(--rule-2); }
+  :global([data-step="2"]) .live { fill: var(--accent); animation: blink 1.4s steps(2) infinite; }
+  :global([data-step="2"]) .live--2 { animation-delay: 0.3s; } :global([data-step="2"]) .live--3 { animation-delay: 0.6s; }
+  @keyframes blink { 50% { opacity: 0.25; } }
+  .stack .card { transform: translateX(-12px); opacity: 0.5; transition: transform 0.4s, opacity 0.4s; }
+  :global([data-step="2"]) .stack .card { transform: none; opacity: 1; }
+  :global([data-step="2"]) .stack .card:nth-of-type(2) { transition-delay: 0.1s; }
+</style>
