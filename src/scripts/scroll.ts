@@ -12,6 +12,7 @@ const slideLabel = document.querySelector<HTMLElement>("[data-slide-label]")!;
 const projectsBar = document.querySelector<HTMLElement>("[data-projects-bar]")!;
 const count = slides.length;
 
+let target = 0, shown = 0, animating = false;
 const pad = (n: number, len = 2) => String(n).padStart(len, "0");
 const smooth = (k: number) => k * k * (3 - 2 * k);
 
@@ -27,7 +28,11 @@ function update() {
   // progress 0..1 inside the projects pin
   const r = wraps[PROJECTS].getBoundingClientRect();
   const span = Math.max(1, r.height - stickies[PROJECTS].offsetHeight);
-  const p = Math.max(0, Math.min(0.999, -r.top / span));
+  const raw = Math.max(0, Math.min(0.999, -r.top / span));
+  // Ease the displayed progress toward the real scroll position so wheel notches glide instead of snapping.
+  target = raw;
+  if (!animating && Math.abs(target - shown) >= 0.0004) { animating = true; requestAnimationFrame(ease); }
+  const p = shown;
 
   scrollLabel.textContent = pad(pct, 3);
   navLinks.forEach((a) => a.setAttribute("aria-current", String(a.dataset.nav === keys[sec])));
@@ -66,6 +71,14 @@ function update() {
 
   slideLabel.textContent = pad(Math.round(pos) + 1);
   projectsBar.style.setProperty("--bar", `${sec === PROJECTS ? Math.round(p * 100) : sec > PROJECTS ? 100 : 0}%`);
+}
+
+function ease() {
+  const d = target - shown;
+  if (Math.abs(d) < 0.0004) { shown = target; animating = false; update(); return; }
+  shown += d * 0.14;
+  update();
+  requestAnimationFrame(ease);
 }
 
 let queued = false;
