@@ -1,81 +1,19 @@
 ---
 import type { Showcase } from "../lib";
+import Chess from "./dia/Chess.astro";
+import Meta from "./dia/Meta.astro";
+import Aleas from "./dia/Aleas.astro";
+import Drone from "./dia/Drone.astro";
 
 interface Props {
   showcase: Showcase;
 }
 
-// One small animated diagram per project; zone N lights up at scroll step N.
-const { diagram, zones, glyph } = Astro.props.showcase;
+// One animated, project-specific illustration per slide; layer N lights up at scroll step N.
+const { diagram } = Astro.props.showcase;
 ---
 
-{diagram === "A" && (
-  <div class="dia-a">
-    <div class="zone zone--0 lift">
-      <span class="zone__label">{zones[0]}</span>
-      <div class="box"><i></i><span class="chip"></span><span class="chip" style="width:70%"></span><span class="pane" style="height:26%"></span><span class="btn-ghost" style="margin-top:auto"></span></div>
-    </div>
-    <div class="zone zone--1 lift">
-      <span class="zone__label">{zones[1]}</span>
-      <div class="box"><i></i><span class="chip"></span><div class="split"><span class="pane"></span><span class="pane"></span></div><span class="btn-ghost" style="width:50%"></span></div>
-    </div>
-    <div class="zone zone--2 lift">
-      <span class="zone__label">{zones[2]}</span>
-      <div class="box"><i></i><span class="chip" style="width:60%"></span><div class="split"><span class="pane" style="flex:2"></span><span class="pane"></span><span class="pane"></span></div><span class="btn-ghost" style="width:30%"></span></div>
-    </div>
-  </div>
-)}
-
-{diagram === "B" && (
-  <div class="dia-b">
-    <div class="dia-b__ticks"><span>00:00</span><span>00:03</span><span>00:06</span><span>00:09</span><span>00:12</span></div>
-    <div class="track-wrap zone zone--0">
-      <span class="track__name">{zones[0]}</span>
-      <div class="track"><span class="c-fl" style="flex:1"></span><span class="c-fill2" style="flex:1.4"></span><span class="c-fill2" style="flex:.8"></span><span class="c-fill2" style="flex:1.2"></span></div>
-    </div>
-    <div class="track-wrap zone zone--1">
-      <span class="track__name">{zones[1]}</span>
-      <div class="track" style="gap:0"><span class="c-fl" style="width:16%"></span><span class="c-fill2" style="width:26%;margin-left:6%"></span><span class="c-fill2" style="width:12%;margin-left:14%"></span></div>
-    </div>
-    <div class="track-wrap zone zone--2">
-      <span class="track__name">{zones[2]}</span>
-      <div class="track"><span class="wave"></span></div>
-    </div>
-    <div class="dia-b__spare"></div>
-    <div class="playhead"></div>
-  </div>
-)}
-
-{diagram === "C" && (
-  <div class="dia-c">
-    <div class="box dia-c__card zone zone--0 lift">
-      <span class="dia-c__dot"></span>
-      <span class="dia-c__glyph display" aria-hidden="true">{glyph ?? "Aa"}</span>
-      <span class="zone__label">{zones[0]}</span>
-      <div class="swatches"><span class="c-ink"></span><span class="c-fl"></span><span class="c-fill"></span><span class="c-white"></span></div>
-    </div>
-    <div class="dia-c__col">
-      <div class="zone zone--1">
-        <div class="box"><span class="c-ink"></span><span class="c-fl"></span><span class="c-fill"></span><span class="c-fill3"></span></div>
-      </div>
-      <div class="zone zone--2">
-        <div class="box dia-c__grid"><span class="c-fl"></span><span class="c-fill2"></span><span class="c-fill3"></span><span class="c-fill2"></span><span class="c-fill3"></span><span class="c-fill2"></span><span class="c-fl"></span><span class="c-fill3"></span></div>
-      </div>
-    </div>
-  </div>
-)}
-
-{diagram === "D" && (
-  <div class="dia-d">
-    {zones.map((z, i) => (
-      <Fragment>
-        {i > 0 && <span class={`link link--${i - 1}`}></span>}
-        <div class={`box zone zone--${i} lift`}>
-          <span class="zone__label">{z}</span><i></i>
-          {i % 2 === 0 ? <span class="slot"></span> : <div class="split" style="gap:4px"><span class="pane"></span><span class="pane"></span></div>}
-          <span class="pane" style="flex:1"></span>
-        </div>
-      </Fragment>
-    ))}
-  </div>
-)}
+{diagram === "D" && <Chess />}
+{diagram === "A" && <Meta />}
+{diagram === "C" && <Aleas />}
+{diagram === "B" && <Drone />}

@@ -1,0 +1,185 @@
+---
+// Chess Club: a board that actually plays the moves described by each step.
+const C = 32, X0 = 12, Y0 = 12;
+const back = ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"];
+const px = (c: number) => X0 + c * C;
+const py = (r: number) => Y0 + r * C;
+
+const squares = Array.from({ length: 64 }, (_, i) => ({ c: i % 8, r: Math.floor(i / 8) }));
+type P = { c: number; r: number; g: string; w: boolean; id?: string };
+const pieces: P[] = [];
+back.forEach((g, c) => {
+  pieces.push({ c, r: 0, g, w: false });
+  pieces.push({ c, r: 1, g: "♟", w: false, id: c === 4 ? "pawn" : undefined });
+  pieces.push({ c, r: 6, g: "♟", w: true });
+  pieces.push({ c, r: 7, g, w: true, id: c === 6 ? "knight" : undefined });
+});
+const sqPos = (c: number, r: number) => ({ x: px(c), y: py(r) });
+const g1 = sqPos(6, 7), f3 = sqPos(5, 5), e7 = sqPos(4, 1), e5 = sqPos(4, 3);
+const ticks = Array.from({ length: 9 }, (_, i) => i);
+const wave = Array.from({ length: 4 }, (_, i) => i);
+---
+
+<svg class="chess" viewBox="0 0 680 280" role="img" aria-label="Chess board with the architecture layers of the Chess Club project">
+  <!-- board -->
+  <g class="board">
+    {squares.map(({ c, r }) => (
+      <rect x={px(c)} y={py(r)} width={C} height={C} class={(c + r) % 2 ? "sq sq--d" : "sq"} />
+    ))}
+    <rect x={X0} y={Y0} width={C * 8} height={C * 8} class="frame" />
+  </g>
+  <!-- move highlights -->
+  <g class="hl hl--1"><rect x={g1.x} y={g1.y} width={C} height={C} /><rect x={f3.x} y={f3.y} width={C} height={C} /></g>
+  <g class="hl hl--2"><rect x={e7.x} y={e7.y} width={C} height={C} /><rect x={e5.x} y={e5.y} width={C} height={C} /></g>
+
+  {pieces.map((p) => (
+    <g transform={`translate(${px(p.c) + C / 2} ${py(p.r) + C / 2 + 9})`}>
+      <g class={p.id ? `mv mv--${p.id}` : "pc"} style={`--d:${(p.c + p.r) * 30}ms`}>
+        <text class={p.w ? "pcw" : "pcb"} text-anchor="middle">{p.g}</text>
+      </g>
+    </g>
+  ))}
+
+  <!-- LAYER 0 · svelte + rust -->
+  <g class="lay lay--0">
+    <text x="300" y="26" class="cap">UI  →  SERVER</text>
+    <rect x="300" y="40" width="150" height="104" class="bx" />
+    <text x="314" y="62" class="hd">SVELTE</text>
+    <text x="314" y="80" class="sm">board · timers</text>
+    <text x="314" y="94" class="sm">promotion dialog</text>
+    <rect x="314" y="108" width="122" height="6" class="fillbar" />
+    <rect x="314" y="108" width="34" height="6" class="acc" />
+    <text x="314" y="134" class="sm mute">plain JS · no heavy runtime</text>
+    <rect x="520" y="40" width="150" height="104" class="bx" />
+    <text x="534" y="62" class="hd">RUST · AXUM</text>
+    <text x="534" y="80" class="sm">game loop · timers</text>
+    <text x="534" y="94" class="sm">move validation</text>
+    <rect x="534" y="108" width="122" height="6" class="fillbar" />
+    <rect x="534" y="108" width="22" height="6" class="acc" />
+    <text x="534" y="134" class="sm mute">small, predictable RAM</text>
+    <path d="M450 92 H520" class="flow" />
+    <path d="M520 92 L512 87 M520 92 L512 97" class="arrowhead" />
+    <rect x="300" y="176" width="150" height="34" class="bx dashed" />
+    <text x="375" y="197" class="sm" text-anchor="middle">NGINX · static assets</text>
+    <path d="M375 144 V176" class="rule" />
+    <rect x="520" y="176" width="150" height="34" class="bx dashed" />
+    <text x="595" y="197" class="sm" text-anchor="middle">SQLITE · games, stats</text>
+    <path d="M595 144 V176" class="rule" />
+    <text x="300" y="248" class="sm mute">light on CPU and RAM, on purpose</text>
+  </g>
+
+  <!-- LAYER 1 · graphql -->
+  <g class="lay lay--1">
+    <text x="300" y="26" class="cap">GRAPHQL · ASYNC-GRAPHQL</text>
+    <rect x="300" y="40" width="190" height="128" class="bx" />
+    <text x="314" y="62" class="hd acc-t">mutation</text>
+    <text x="314" y="82" class="sm">makeMove(</text>
+    <text x="328" y="98" class="sm">gameId: 42,</text>
+    <text x="328" y="114" class="sm">from: "g1", to: "f3"</text>
+    <text x="314" y="130" class="sm">) {"{"} fen legal {"}"}</text>
+    <rect x="314" y="144" width="60" height="10" class="acc" />
+    <path d="M490 104 H540" class="flow flow--run" />
+    <rect x="540" y="40" width="130" height="128" class="bx" />
+    <text x="552" y="62" class="cap">RESOLVERS</text>
+    <text x="552" y="82" class="sm mute">createUser</text>
+    <text x="552" y="98" class="sm mute">createGame</text>
+    <rect x="546" y="104" width="118" height="16" class="acc" />
+    <text x="552" y="116" class="sm wh">makeMove</text>
+    <text x="552" y="136" class="sm mute">getUserProfile</text>
+    <text x="552" y="152" class="sm mute">getLeaderboard</text>
+    <text x="300" y="198" class="sm mute">resolvers  →  game service  →  stats service</text>
+    <text x="300" y="214" class="sm mute">legality · streaks · per-level stats</text>
+    <g class="pkt"><circle r="4" cy="104" cx="490" /></g>
+  </g>
+
+  <!-- LAYER 2 · stockfish -->
+  <g class="lay lay--2">
+    <text x="300" y="26" class="cap">STOCKFISH · UCI</text>
+    <text x="300" y="52" class="sm">skill level</text>
+    {ticks.map((i) => <rect x={382 + i * 20} y="44" width="2" height={i % 2 ? 8 : 12} class="tick" />)}
+    <g class="knob"><path d="M0 40 L-5 32 H5 Z" /></g>
+    <text x="300" y="86" class="sm">think time</text>
+    <rect x="382" y="78" width="168" height="8" class="fillbar" />
+    <rect x="382" y="78" width="70" height="8" class="acc" />
+    <text x="300" y="106" class="sm">imperfection</text>
+    <rect x="382" y="98" width="168" height="8" class="fillbar" />
+    <rect x="382" y="98" width="26" height="8" class="acc imp" />
+    <text x="300" y="150" class="cap">CANDIDATES</text>
+    <rect x="300" y="160" width="370" height="20" class="acc" />
+    <text x="310" y="174" class="sm wh">1. e7e5</text><text x="660" y="174" class="sm wh" text-anchor="end">+0.3</text>
+    <text x="310" y="198" class="sm mute">2. c7c5</text><text x="660" y="198" class="sm mute" text-anchor="end">+0.2</text>
+    <text x="310" y="218" class="sm mute">3. e7e6</text><text x="660" y="218" class="sm mute" text-anchor="end">+0.1</text>
+    <text x="580" y="92" class="think" text-anchor="start">{wave.map(() => "·").join(" ")}</text>
+  </g>
+
+  <!-- LAYER 3 · self hosted -->
+  <g class="lay lay--3">
+    <text x="300" y="26" class="cap">DEPLOY · SELF-HOSTED</text>
+    <rect x="300" y="44" width="96" height="60" class="bx" />
+    <text x="348" y="70" class="hd" text-anchor="middle">GITHUB</text>
+    <text x="348" y="88" class="sm" text-anchor="middle">Actions</text>
+    <path d="M396 74 H452" class="flow flow--run" />
+    <text x="424" y="66" class="sm acc-t" text-anchor="middle">WG</text>
+    <rect x="452" y="38" width="218" height="190" class="bx dashed" />
+    <text x="464" y="54" class="cap">HOME SERVER · DOCKER COMPOSE</text>
+    <rect x="466" y="66" width="190" height="34" class="bx" /><text x="478" y="87" class="sm">frontend · nginx</text>
+    <rect x="466" y="110" width="190" height="34" class="bx" /><text x="478" y="131" class="sm">backend · rust + engine</text>
+    <rect x="466" y="154" width="190" height="34" class="bx" /><text x="478" y="175" class="sm">sqlite volume</text>
+    <circle cx="640" cy="83" r="3" class="dot" /><circle cx="640" cy="127" r="3" class="dot dot--2" /><circle cx="640" cy="171" r="3" class="dot dot--3" />
+    <text x="466" y="214" class="sm mute">no managed cloud services</text>
+    <text x="300" y="150" class="sm mute">push → build → ship</text>
+    <text x="300" y="166" class="sm mute">over WireGuard</text>
+  </g>
+</svg>
+
+<style>
+  .chess { width: min(100%, 720px); max-height: 100%; overflow: visible; font-family: var(--mono); }
+  .sq { fill: var(--white); }
+  .sq--d { fill: var(--fill-2); }
+  .frame { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .hl rect { fill: var(--accent); opacity: 0; transition: opacity 0.35s; }
+  :global([data-step="1"]) .hl--1 rect, :global([data-step="2"]) .hl--2 rect { opacity: 0.35; }
+  :global([data-step="2"]) .hl--1 rect { opacity: 0.12; }
+  text { font-family: var(--mono); }
+  .pcw, .pcb { font-size: 26px; font-family: system-ui, "Apple Symbols", sans-serif; }
+  .pcb { fill: var(--ink); }
+  .pcw { fill: var(--white); stroke: var(--ink); stroke-width: 1; paint-order: stroke; }
+  .pc { animation: drop 0.5s var(--d) backwards; }
+  .mv { transition: transform 0.7s cubic-bezier(0.3, 0.7, 0.2, 1); }
+  :global([data-step="1"]) .mv--knight, :global([data-step="2"]) .mv--knight, :global([data-step="3"]) .mv--knight { transform: translate(-32px, -64px); }
+  :global([data-step="2"]) .mv--pawn, :global([data-step="3"]) .mv--pawn { transform: translate(0, 64px); }
+  @keyframes drop { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .board, .hl, .pc, .mv { transition: opacity 0.4s; }
+  :global([data-step="3"]) .board, :global([data-step="3"]) .pc, :global([data-step="3"]) .mv { opacity: 0.35; }
+
+  .lay { opacity: 0; transform: translateY(8px); transition: opacity 0.35s, transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); pointer-events: none; }
+  :global([data-step="0"]) .lay--0, :global([data-step="1"]) .lay--1, :global([data-step="2"]) .lay--2, :global([data-step="3"]) .lay--3 { opacity: 1; transform: none; }
+
+  .cap { font-size: 9px; letter-spacing: 0.24em; fill: var(--accent); }
+  .hd { font-size: 12px; letter-spacing: 0.14em; fill: var(--ink); }
+  .sm { font-size: 10px; letter-spacing: 0.06em; fill: var(--ink); }
+  .mute { fill: var(--muted); }
+  .wh { fill: var(--white); }
+  .acc-t { fill: var(--accent); }
+  .bx { fill: var(--white); stroke: var(--ink); stroke-width: 1.5; }
+  .dashed { fill: none; stroke: var(--rule-2); stroke-dasharray: 4 4; }
+  .fillbar { fill: var(--fill-2); }
+  .acc { fill: var(--accent); }
+  .tick { fill: var(--muted-2); }
+  .rule { stroke: var(--rule-2); stroke-width: 1.5; fill: none; }
+  .flow { stroke: var(--accent); stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+  .flow--run { animation: dash 0.8s linear infinite; }
+  .arrowhead { stroke: var(--accent); stroke-width: 1.5; fill: none; }
+  @keyframes dash { to { stroke-dashoffset: -9; } }
+  .pkt circle { fill: var(--accent); animation: pkt 1.2s ease-in-out infinite; }
+  @keyframes pkt { from { transform: translateX(0); } to { transform: translateX(50px); } }
+  .knob path { fill: var(--accent); transform: translate(382px, 12px); animation: knob 4s ease-in-out infinite alternate; }
+  @keyframes knob { from { transform: translate(382px, 12px); } to { transform: translate(502px, 12px); } }
+  .imp { animation: imp 1.6s steps(5) infinite alternate; }
+  @keyframes imp { from { width: 20px; } to { width: 44px; } }
+  .think { font-size: 14px; fill: var(--accent); letter-spacing: 0.2em; animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0.2; } }
+  .dot { fill: var(--accent); animation: blink 1.4s steps(2) infinite; }
+  .dot--2 { animation-delay: 0.3s; }
+  .dot--3 { animation-delay: 0.6s; }
+</style>
