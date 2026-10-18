@@ -32,11 +32,11 @@ function update() {
   scrollLabel.textContent = pad(pct, 3);
   navLinks.forEach((a) => a.setAttribute("aria-current", String(a.dataset.nav === keys[sec])));
 
-  // Each project segment: 3 steps over the first 80%, then a slide to the next project.
+  // Each project segment: steps over the first 75%, a hold on the last step, then a slide to the next project.
   const t = sec === PROJECTS ? p * count : sec > PROJECTS ? count : 0;
   const base = Math.min(count - 1, Math.floor(t));
   const fr = t - Math.floor(t);
-  const k = Math.max(0, Math.min(1, (fr - 0.8) / 0.2));
+  const k = Math.max(0, Math.min(1, (fr - 0.88) / 0.12));
   const pos = base >= count - 1 ? count - 1 : base + smooth(k);
 
   slides.forEach((el, i) => {
@@ -46,7 +46,7 @@ function update() {
     let step = 0;
     let local = 0;
     if (sec > PROJECTS || (sec === PROJECTS && i < base)) { step = n - 1; local = 1; }
-    else if (sec === PROJECTS && i === base) { local = Math.min(1, fr / 0.8); step = Math.min(n - 1, Math.floor(local * n)); }
+    else if (sec === PROJECTS && i === base) { local = Math.min(1, fr / 0.75); step = Math.min(n - 1, Math.floor(local * n)); }
 
     el.style.transform = `translateX(${(d * 100).toFixed(2)}%) scale(${(1 - a * 0.06).toFixed(3)})`;
     el.style.opacity = (1 - a * 0.85).toFixed(2);
@@ -82,7 +82,7 @@ document.querySelectorAll<HTMLElement>("[data-jump]").forEach((b) =>
     const w = wraps[PROJECTS];
     const span = Math.max(1, w.offsetHeight - stickies[PROJECTS].offsetHeight);
     const top = w.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + ((i + ((j + 0.5) / n) * 0.8) / count) * span, behavior: "smooth" });
+    window.scrollTo({ top: top + ((i + ((j + 0.5) / n) * 0.75) / count) * span, behavior: "smooth" });
   }),
 );
 
