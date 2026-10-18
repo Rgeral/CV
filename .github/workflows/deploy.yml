@@ -19,7 +19,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Build site and CV PDF
+      - name: Build site
         run: |
           npm ci
           npm run build

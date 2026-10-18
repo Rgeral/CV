@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/generate-pdf.mjs",
-    "build:site": "astro build",
+    "build": "astro build",
+    "build:pdf": "astro build && node scripts/generate-pdf.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
